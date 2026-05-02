@@ -124,15 +124,14 @@ function decodeJWT(token: string): { id?: string } | null {
 }
 function getFrameFilter(hex: string): string {
   const filters: Record<string, string> = {
-    "#FBEE7B": "saturate(1.1) brightness(1.15) hue-rotate(0deg)",
-    "#FF6DB7": "saturate(1.5) brightness(0.95) hue-rotate(320deg)",
-    "#4AA7FF": "saturate(1.4) brightness(1.1) hue-rotate(200deg)",
-    "#26B56D": "saturate(1.2) brightness(1) hue-rotate(110deg)",
-    "#F93C35": "saturate(1.6) brightness(0.85) hue-rotate(5deg)",
-    "#011899": "saturate(1) brightness(0.45) hue-rotate(210deg)",
-    "#FD6E75": "saturate(1.3) brightness(0.95) hue-rotate(345deg)",
-    "#FB6501": "saturate(1.4) brightness(0.85) hue-rotate(25deg)",
-    "#FFFFFF": "brightness(1.8) saturate(0.3) contrast(0.8)",
+    "#FF6DB7": "saturate(1) brightness(0.8) hue-rotate(280deg)",
+    "#4AA7FF": "saturate(1) brightness(0.8) hue-rotate(150deg)",
+    "#26B56D": "saturate(1.2) brightness(0.8) hue-rotate(80deg)",
+    "#F93C35": "saturate(3.5) brightness(0.6) hue-rotate(300deg)",
+    "#011899": "saturate(1.7) brightness(0.3) hue-rotate(180deg)",
+    "#FD6E75": "saturate(1.3) brightness(0.8) hue-rotate(300deg)",
+    "#FB6501": "saturate(2) brightness(0.75) hue-rotate(340deg)",
+    "#FFFFFF": "brightness(1.6) saturate(0.1) contrast(1.2)",
     "#000000": "brightness(0.05) saturate(0)",
   };
   return filters[hex] ?? "none";
@@ -152,6 +151,9 @@ export default function PostcardStudioPage() {
   const [currentKeywordIndex, setCurrentKeywordIndex] = useState(0);
   const [showTitlePopup, setShowTitlePopup] = useState(false);
   const [postcardTitle, setPostcardTitle] = useState("");
+  const [showSharePopup, setShowSharePopup] = useState(false);
+  const [shareUrl, setShareUrl] = useState<string>("");
+  const [generatingShare, setGeneratingShare] = useState(false);
 
   const dragging = useRef<{
     id: string;
@@ -374,6 +376,32 @@ export default function PostcardStudioPage() {
       setSaving(false);
     }
   };
+  const handleShare = async () => {
+    setShowSharePopup(true);
+    if (shareUrl) return; // already generated
+
+    setGeneratingShare(true);
+    try {
+      const html2canvas = (await import("html2canvas")).default;
+      if (!cardRef.current) return;
+
+      const canvas = await html2canvas(cardRef.current, {
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        scale: 2, // higher resolution
+      });
+
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        setShareUrl(url);
+        setGeneratingShare(false);
+      }, "image/png");
+    } catch {
+      setGeneratingShare(false);
+    }
+  };
+
   const placedSrcs = new Set(placedItems.map((item) => item.src));
   // const placedFestivalIndexes = new Set(
   //   placedItems
@@ -518,32 +546,42 @@ export default function PostcardStudioPage() {
             marginBottom: "20px",
           }}
         >
-          {/* White postcard with optional frame behind it */}
-          <div style={{ position: "relative", flexShrink: 0 }}>
-            {/* Stamp-style frame — behind the card */}
+          {/* Postcard container including optional frame */}
+          <div
+            ref={cardRef}
+            style={{
+              position: "relative",
+              width: CARD_W + FRAME_THICKNESS,
+              height: CARD_H + FRAME_THICKNESS,
+              flexShrink: 0,
+              overflow: "hidden",
+            }}
+          >
             {frameColor && (
-              <div
+              <img
+                src="/postcard/frame.png"
+                alt="Postcard frame"
+                draggable={false}
                 style={{
                   position: "absolute",
-                  top: -FRAME_THICKNESS / 2,
-                  left: -FRAME_THICKNESS / 2,
+                  top: 0,
+                  left: 0,
                   width: CARD_W + FRAME_THICKNESS,
                   height: CARD_H + FRAME_THICKNESS,
                   zIndex: 0,
                   pointerEvents: "none",
-                  borderStyle: "solid",
-                  borderWidth: FRAME_THICKNESS / 2,
-                  borderImage: `url('/postcard/frame.png') ${FRAME_THICKNESS / 2} stretch`,
                   filter: getFrameFilter(frameColor),
+                  objectFit: "fill",
                 }}
               />
             )}
 
             {/* The actual white postcard */}
             <div
-              ref={cardRef}
               style={{
-                position: "relative",
+                position: "absolute",
+                top: FRAME_THICKNESS / 2,
+                left: FRAME_THICKNESS / 2,
                 width: CARD_W,
                 height: CARD_H,
                 background: "#ffffff",
@@ -726,9 +764,7 @@ export default function PostcardStudioPage() {
           </button>
 
           <button
-            onClick={() => {
-              /* TODO: share functionality */
-            }}
+            onClick={handleShare}
             className="action-btn"
             style={{
               height: 44,
@@ -745,7 +781,7 @@ export default function PostcardStudioPage() {
               transition: "transform 0.1s ease, box-shadow 0.1s ease",
             }}
           >
-            SHARE IT WITH A FRIEND
+            Share it with a friend
           </button>
         </div>
         {showTitlePopup && (
@@ -865,6 +901,114 @@ export default function PostcardStudioPage() {
             </div>
           </div>
         )}
+        {showSharePopup && (
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.4)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 200,
+            }}
+          >
+            <div
+              style={{
+                width: 400,
+                background: "#ffffff",
+                boxShadow: "-6px 6px 0px var(--pink-primary)",
+                border: "1px solid #000",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {/* HEADER */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  padding: "8px 12px",
+                  borderBottom: "1px solid #000",
+                }}
+              >
+                <button
+                  onClick={() => setShowSharePopup(false)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: 18,
+                    cursor: "pointer",
+                    color: "#000000",
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* CONTENT */}
+              <div
+                style={{
+                  padding: "20px 24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-gafiton), sans-serif",
+                    fontSize: 20,
+                    color: "#000",
+                  }}
+                >
+                  Download your postcard
+                </span>
+
+                <p
+                  style={{
+                    fontFamily: "var(--font-gafiton), sans-serif",
+                    fontSize: 14,
+                    color: "#333",
+                    margin: 0,
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {generatingShare
+                    ? "Generating your postcard image..."
+                    : shareUrl
+                      ? "Your postcard image is ready. Click the button below to download it."
+                      : "Click Download Postcard to generate the image."}
+                </p>
+
+                {shareUrl && (
+                  <a
+                    href={shareUrl}
+                    className="action-btn"
+                    download="my-postcard.png"
+                    style={{
+                      display: "inline-flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: 44,
+                      padding: "0 24px",
+                      background: "#ffffff",
+                      border: "1px solid #000",
+                      cursor: "pointer",
+                      fontFamily: "var(--font-gafiton), sans-serif",
+                      fontSize: 16,
+                      textTransform: "uppercase",
+                      color: "#000000",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Download postcard
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <style>{`
@@ -875,7 +1019,7 @@ export default function PostcardStudioPage() {
         }
         .action-btn:hover {
           transform: translate(-2px, -2px);
-          box-shadow: 6px 6px 0px var(--pink-primary);
+          box-shadow: 4px 4px 0px var(--pink-primary);
         }
           .ai-recommendation {
   position: relative;

@@ -42,15 +42,14 @@ const TOTAL_SLOTS = 6;
 // Same filter map as postcard studio so frames render identically
 function getFrameFilter(hex: string): string {
   const filters: Record<string, string> = {
-    "#FBEE7B": "saturate(1.1) brightness(1.15) hue-rotate(0deg)",
-    "#FF6DB7": "saturate(1.5) brightness(0.95) hue-rotate(320deg)",
-    "#4AA7FF": "saturate(1.4) brightness(1.1) hue-rotate(200deg)",
-    "#26B56D": "saturate(1.2) brightness(1) hue-rotate(110deg)",
-    "#F93C35": "saturate(1.6) brightness(0.85) hue-rotate(5deg)",
-    "#011899": "saturate(1) brightness(0.45) hue-rotate(210deg)",
-    "#FD6E75": "saturate(1.3) brightness(0.95) hue-rotate(345deg)",
-    "#FB6501": "saturate(1.4) brightness(0.85) hue-rotate(25deg)",
-    "#FFFFFF": "brightness(1.8) saturate(0.3) contrast(0.8)",
+    "#FF6DB7": "saturate(1) brightness(0.8) hue-rotate(280deg)",
+    "#4AA7FF": "saturate(1) brightness(0.8) hue-rotate(150deg)",
+    "#26B56D": "saturate(1.2) brightness(0.8) hue-rotate(80deg)",
+    "#F93C35": "saturate(3.5) brightness(0.6) hue-rotate(300deg)",
+    "#011899": "saturate(1.7) brightness(0.3) hue-rotate(180deg)",
+    "#FD6E75": "saturate(1.3) brightness(0.8) hue-rotate(300deg)",
+    "#FB6501": "saturate(2) brightness(0.75) hue-rotate(340deg)",
+    "#FFFFFF": "brightness(1.6) saturate(0.1) contrast(1.2)",
     "#000000": "brightness(0.05) saturate(0)",
   };
   return filters[hex] ?? "none";
