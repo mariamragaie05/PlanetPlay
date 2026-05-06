@@ -6,7 +6,7 @@ export default function EgyptCategories() {
       countryName="Egypt"
       foodImg="/countries/egypt/food.png"
       festivalsImg="/countries/egypt/festivals.png"
-      landmarksImg="/countries/egypt/landmarks.png"
+      landmarksImg="/countries/egypt/landmark.png"
     />
   );
 }

@@ -607,7 +607,7 @@ export default function TheCairoTowerPage() {
                 width: block.dropZone.width,
                 height: block.dropZone.height,
                 zIndex: block.dropZone.zIndex,
-                background: "rgba(255,0,0,0.2)", // uncomment to debug
+                // background: "rgba(255,0,0,0.2)", // uncomment to debug
               }}
             />
           ) : null,

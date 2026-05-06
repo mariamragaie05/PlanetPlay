@@ -107,7 +107,7 @@ export default function AfricaPage() {
           margin-top: 100px;
           margin-left: auto;
           margin-right: auto;
-          width: 75%;
+          width: 85%;
           height: auto;
           z-index: 1;
         }
@@ -184,7 +184,7 @@ export default function AfricaPage() {
 
           <div className="continent-container">
             <Image
-              src="/map/africa.png"
+              src="/map/Africa.png"
               alt="Africa"
               width={1000}
               height={680}
@@ -192,8 +192,8 @@ export default function AfricaPage() {
                 width: "100%",
                 height: "auto",
                 display: "block",
-                scale: "0.55",
-                transform: "translateY(-450px)",
+                scale: "1",
+                transform: "translateY(-50px)",
               }}
               priority
             />
