@@ -34,7 +34,7 @@ const SCENE_IMAGES = [
   "/countries/china/festivals/cny/scene_21.png", // after block10_1 (dragon 2) — FINAL
 ];
 
-const INFO_CARD_IMAGE = "/countries/china/festivals/cny/info_card.png";
+const INFO_CARD_IMAGE = "/infocards/info_card_festival.png";
 
 const FESTIVAL_DESCRIPTION =
   "Chinese New Year is the biggest celebration of the year! Families clean their homes, hang red decorations, eat special meals, and watch dragon dances to welcome a fresh start and lots of good luck.";

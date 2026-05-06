@@ -22,10 +22,10 @@ const BOWL_STATES = [
 ];
 
 // Info popup card image
-const INFO_CARD_IMAGE = "/countries/china/food/friedrice/info_card.png";
+const INFO_CARD_IMAGE = "/infocards/info_card_food.png";
 
 // Background image
-const BG_IMAGE = "/countries/china/food/friedrice/background.png";
+const BG_IMAGE = "/foodgame_background.png";
 
 // Ingredients in the REQUIRED ORDER (this is the recipe order)
 const INGREDIENTS = [

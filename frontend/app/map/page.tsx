@@ -194,20 +194,20 @@ export default function MapPage() {
             {/* Asia explore button */}
             <button
               className="continent-btn"
-              style={{ position: "absolute", top: "160px", left: "690px" }}
+              style={{ position: "absolute", top: "28%", left: "73%" }}
               onClick={() => router.push("/map/asia")}
             >
               <span>EXPLORE</span>
             </button>
 
-            {/* Africa explore button
+            {/* Africa explore button */}
             <button
               className="continent-btn"
-              style={{ position: "absolute", top: "376px", left: "557px" }}
+              style={{ position: "absolute", top: "52%", left: "48%" }}
               onClick={() => router.push("/map/africa")}
             >
               <span>EXPLORE</span>
-            </button> */}
+            </button>
           </div>
         </div>
       </div>

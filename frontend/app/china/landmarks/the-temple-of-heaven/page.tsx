@@ -8,8 +8,7 @@ import Navbar from "@/app/components/Navbar";
 // ─────────────────────────────────────────────
 
 const BG_IMAGE = "/countries/china/landmarks/templeofheaven/background.png";
-const INFO_CARD_IMAGE =
-  "/countries/china/landmarks/templeofheaven/info_card.png";
+const INFO_CARD_IMAGE = "/infocards/info_card_landmark.png";
 
 // No separate placedImage — same image is used for both carousel and overlay
 const BLOCKS = [
@@ -299,7 +298,7 @@ export default function TempleOfHeavenPage() {
         />
         {/* Yellow strings */}
         <img
-          src="/countries/china/landmarks/templeofheaven/congrats_strings.png"
+          src="/congrats_strings.png"
           alt=""
           draggable={false}
           style={{

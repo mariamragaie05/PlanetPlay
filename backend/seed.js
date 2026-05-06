@@ -34,18 +34,18 @@ const seed = async () => {
     {
       countryName: "Egypt",
       type: "food",
-      name: "Koshari",
+      name: "Feteer meshaltet",
       description:
-        "Egypt's beloved national dish — a hearty mix of rice, lentils, macaroni, and crispy onions topped with spiced tomato sauce.",
+        "A flaky, layered pastry that can be sweet (with honey and nuts) or savory (with cheese or meat). Often called the Egyptian pancake.",
       imageUrl: "",
       funFacts: [],
     },
     {
       countryName: "Egypt",
       type: "food",
-      name: "Ful Medames",
+      name: "Koshari",
       description:
-        "Slow-cooked fava beans seasoned with cumin, lemon juice, and olive oil. The most popular Egyptian breakfast eaten by millions every day.",
+        "Egypt's beloved national dish — a hearty mix of rice, lentils, macaroni, and crispy onions topped with spiced tomato sauce.",
       imageUrl: "",
       funFacts: [],
     },
@@ -63,36 +63,6 @@ const seed = async () => {
     {
       countryName: "Egypt",
       type: "landmark",
-      name: "The Great Pyramid of Giza",
-      description:
-        "The oldest of the Seven Wonders of the Ancient World and the only one still standing today.",
-      imageUrl: "",
-      funFacts: [
-        "The Great Pyramid was the tallest man-made structure in the world for over 3,800 years.",
-        "It is made of approximately 2.3 million stone blocks, each weighing between 2.5 and 15 tonnes.",
-        "The pyramid was built as a tomb for Pharaoh Khufu around 2560 BC.",
-        "The sides of the pyramid are almost perfectly aligned with the four cardinal directions (North, South, East, West).",
-        'Workers\' graffiti found inside the pyramid shows teams named things like "Friends of Khufu".',
-      ],
-    },
-    {
-      countryName: "Egypt",
-      type: "landmark",
-      name: "The Great Sphinx of Giza",
-      description:
-        "A massive limestone statue with a lion's body and a human head, believed to represent Pharaoh Khafre.",
-      imageUrl: "",
-      funFacts: [
-        "The Sphinx is the largest monolith statue in the world, measuring 73 metres long and 20 metres tall.",
-        "It was carved from a single ridge of limestone around 2500 BC.",
-        "The Sphinx originally had a nose — it is believed to have been deliberately broken off, possibly in the 14th century.",
-        'Ancient Egyptians called it "Hor-em-akhet" meaning "Horus on the Horizon".',
-        "For centuries the Sphinx was buried up to its neck in sand and was only fully excavated in the 20th century.",
-      ],
-    },
-    {
-      countryName: "Egypt",
-      type: "landmark",
       name: "The Cairo Tower",
       description:
         "A freestanding concrete tower in Cairo, the tallest structure in Egypt and North Africa.",
@@ -103,6 +73,36 @@ const seed = async () => {
         "On a clear day you can see the Pyramids of Giza from the observation deck at the top.",
         "The tower was built as a symbol of Egyptian independence and modernity after the 1952 revolution.",
         "It sits on Gezira Island in the middle of the Nile River.",
+      ],
+    },
+    {
+      countryName: "Egypt",
+      type: "landmark",
+      name: "The Pyramids of Giza",
+      description:
+        "The last surviving wonders of the ancient world, these monumental tombs and the iconic Sphinx have fascinated visitors for millennia.",
+      imageUrl: "",
+      funFacts: [
+        "The Great Pyramid of Giza was built around 2560 BC for Pharaoh Khufu and was the tallest man-made structure in the world for over 3,800 years.",
+        "The Sphinx, with the body of a lion and the head of a pharaoh, is believed to represent Pharaoh Khafre and was carved from a single block of limestone.",
+        "The pyramids were originally covered in smooth white limestone casing stones that reflected the sun's light, making them shine brilliantly.",
+        "The Great Pyramid consists of approximately 2.3 million stone blocks, some weighing up to 80 tonnes.",
+        "The exact methods used to construct the pyramids remain a mystery, with theories ranging from ramps to levers to alien intervention.",
+      ],
+    },
+    {
+      countryName: "Egypt",
+      type: "landmark",
+      name: "Abu Simbel Temples",
+      description:
+        "Two massive rock temples in southern Egypt built by Pharaoh Ramesses II, famous for their colossal statues and solar alignment.",
+      imageUrl: "",
+      funFacts: [
+        "The temples were carved out of a mountainside in the 13th century BC during the reign of Ramesses II.",
+        "The Great Temple features four colossal statues of Ramesses II, each about 20 metres tall.",
+        "The smaller temple is dedicated to Ramesses II's wife, Queen Nefertari, and features six statues.",
+        "The temples were relocated in the 1960s to save them from flooding caused by the Aswan High Dam.",
+        "The relocation project involved cutting the temples into large blocks and moving them piece by piece to a new location 65 metres higher and 200 metres back from the river.",
       ],
     },
 

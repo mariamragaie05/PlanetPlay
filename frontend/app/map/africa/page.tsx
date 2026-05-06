@@ -1,17 +1,62 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function AfricaPage() {
   const router = useRouter();
+  const [completedStamps, setCompletedStamps] = useState<number | null>(null);
+  const [totalCountries, setTotalCountries] = useState<number | null>(null);
+
+  useEffect(() => {
+    const getUserIdFromToken = () => {
+      const token = localStorage.getItem("token");
+      if (!token) return null;
+      try {
+        const base64Url = token.split(".")[1] || "";
+        const base64 = base64Url
+          .replace(/-/g, "+")
+          .replace(/_/g, "/")
+          .padEnd(base64Url.length + ((4 - (base64Url.length % 4)) % 4), "=");
+        return JSON.parse(atob(base64))?.id;
+      } catch {
+        return null;
+      }
+    };
+
+    const fetchCounts = async () => {
+      try {
+        const countryRes = await fetch("http://localhost:5000/api/countries");
+        if (countryRes.ok) {
+          const countries = await countryRes.json();
+          setTotalCountries(Array.isArray(countries) ? countries.length : 0);
+        }
+
+        const userId = getUserIdFromToken();
+        if (!userId) return;
+
+        const stampRes = await fetch(
+          `http://localhost:5000/api/progress/user/${userId}/stamps`,
+        );
+        if (stampRes.ok) {
+          const data = await stampRes.json();
+          setCompletedStamps(data.stampCount || 0);
+        }
+      } catch (error) {
+        console.error("Failed to load stamp counts", error);
+      }
+    };
+
+    fetchCounts();
+  }, []);
 
   return (
     <>
       <style>{`
         .continent-page {
           background-color: var(--blue-primary);
-          min-height: 100vh;
+          max-height: 100vh;
           position: relative;
           overflow: hidden;
         }
@@ -25,8 +70,8 @@ export default function AfricaPage() {
 
         .map-title {
           position: absolute;
-          top: -100px;
-          left: 90px;
+          top: -20px;
+          left: 50px;
           color: white;
           z-index: 3;
           margin: 0;
@@ -34,8 +79,8 @@ export default function AfricaPage() {
 
         .stamp-badge {
           position: absolute;
-          top: -105px;
-          right: 90px;
+          top: -25px;
+          right: 10px;
           background-color: var(--pink-primary);
           width: 216px;
           height: 60px;
@@ -59,10 +104,11 @@ export default function AfricaPage() {
 
         .continent-container {
           position: relative;
-          margin-top: 200px;
-          margin-left: 90px;
-          width: 1200px;
-          height: 680px;
+          margin-top: 100px;
+          margin-left: auto;
+          margin-right: auto;
+          width: 75%;
+          height: auto;
           z-index: 1;
         }
 
@@ -130,7 +176,10 @@ export default function AfricaPage() {
 
           <div className="stamp-badge">
             <Image src="/map/star.png" alt="star" width={30} height={30} />
-            <span className="stamp-count">0/1</span>
+            <span className="stamp-count">
+              {completedStamps === null ? "..." : completedStamps}/
+              {totalCountries === null ? "..." : totalCountries}
+            </span>
           </div>
 
           <div className="continent-container">
@@ -152,11 +201,15 @@ export default function AfricaPage() {
             {/* Egypt pin — adjust top/left once you see your image */}
             <button
               className="pin-btn"
-              style={{ top: "23%", left: "52%" }}
+              style={{ top: "8%", left: "52%" }}
               onClick={() => router.push("/map/africa/egypt")}
               aria-label="Explore Egypt"
             >
-              <span className="pin-emoji">📍</span>{" "}
+              <img
+                className="pin-emoji"
+                src="/dashboard/egypt-pin.png"
+                alt="Pin"
+              />
               <span className="pin-label">EGYPT</span>
             </button>
           </div>
