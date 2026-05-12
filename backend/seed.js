@@ -68,11 +68,11 @@ const seed = async () => {
         "A freestanding concrete tower in Cairo, the tallest structure in Egypt and North Africa.",
       imageUrl: "",
       funFacts: [
-        "The Cairo Tower stands 187 metres tall and was completed in 1961.",
-        "Its lattice design is inspired by the lotus plant, a sacred symbol in ancient Egypt.",
-        "On a clear day you can see the Pyramids of Giza from the observation deck at the top.",
-        "The tower was built as a symbol of Egyptian independence and modernity after the 1952 revolution.",
-        "It sits on Gezira Island in the middle of the Nile River.",
+        "The Cairo Tower is 187 meters tall and was finished in 1961, making it one of the tallest structures in Egypt.",
+        "Its unique pattern is inspired by the lotus flower, an important symbol in ancient Egyptian culture.",
+        "From the top observation deck, you can sometimes see the Pyramids of Giza on a clear day.",
+        "The tower was built to represent Egypt's independence and progress after the 1952 revolution.",
+        "It stands on Gezira Island, right in the middle of the Nile River in Cairo.",
       ],
     },
     {
@@ -140,16 +140,16 @@ const seed = async () => {
     {
       countryName: "Egypt",
       type: "festival",
-      name: "Cairo International Film Festival",
+      name: "Eid Al-Fitr",
       description:
-        "One of the oldest and most prestigious film festivals in Africa and the Middle East, celebrating cinema from around the world.",
+        "A major Islamic holiday marking the end of Ramadan, celebrated by Muslims around the world.",
       imageUrl: "",
       funFacts: [
-        "The Cairo International Film Festival was founded in 1976, making it one of the longest-running film festivals in the Arab world.",
-        "It is one of only 15 film festivals worldwide to receive Category A accreditation from the International Federation of Film Producers.",
-        "The festival showcases hundreds of films from over 70 countries each year.",
-        "It is held annually in November in downtown Cairo.",
-        "Egyptian cinema is one of the oldest in the world — the first Egyptian film was produced in 1896.",
+        "Eid Al-Fitr means 'Festival of Breaking the Fast' in Arabic.",
+        "The date of Eid Al-Fitr is determined by the sighting of the new moon, so it changes each year.",
+        "It is a day of feasting, giving gifts, and charity to those in need.",
+        "In Egypt, it is traditional to eat a sweet pastry called Kahk during Eid Al-Fitr.",
+        "Eid Al-Fitr is one of the two major Islamic holidays, the other being Eid Al-Adha.",
       ],
     },
 
