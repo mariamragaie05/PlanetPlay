@@ -198,8 +198,13 @@ export default function QuizPage({ countryName }: { countryName: string }) {
           userId: getUserIdFromToken(),
         }),
       });
-      if (!res.ok) return null;
+      if (!res.ok) {
+        console.error("AI fetch failed:", res.status);
+        return null;
+      }
       const data = await res.json();
+
+      console.log("🤖 AI response received:", data);
 
       // Shape the AI response into a Question object
       return {
@@ -240,6 +245,7 @@ export default function QuizPage({ countryName }: { countryName: string }) {
           setAiTriggered(true);
           const aiQuestion = await fetchAiQuestion(updatedWrong);
           if (aiQuestion) {
+            console.log("🚀 Injecting AI-generated question:", aiQuestion);
             // Replace the NEXT question with the AI one (keep total at 10)
             const nextIndex = currentIndex + 1;
             if (nextIndex < quiz.questions.length) {
