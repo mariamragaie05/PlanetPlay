@@ -78,7 +78,7 @@ export default function PassportPage() {
           text-align: center;
           z-index: 4;
           pointer-events: none;
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: Gafiton, sans-serif;
           font-weight: 400;
           font-size: 36px;
           line-height: 100%;

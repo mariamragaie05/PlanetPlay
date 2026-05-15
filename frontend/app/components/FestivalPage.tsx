@@ -75,7 +75,7 @@ export default function FestivalPage({
         }
 
         .festival-title {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(28px, 3.3vw, 48px);
           line-height: 100%;
@@ -83,11 +83,11 @@ export default function FestivalPage({
           text-transform: uppercase;
           color: var(--yellow-primary);
           margin: 0 0 10px 0;
-          padding-top: 16px;
+          padding-top: 24px;
         }
 
         .festival-subtitle {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(12px, 1.4vw, 20px);
           line-height: 100%;
@@ -148,16 +148,16 @@ export default function FestivalPage({
         }
 
         .festival-name {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(16px, 2.2vw, 32px);
           line-height: 100%;
           letter-spacing: 0.02em;
           text-align: center;
           text-transform: uppercase;
-          color: white;
+          color: var(--yellow-primary);
           margin: 0;
-          width: 320px;
+          width: 370px;
         }
 
         @media (max-width: 900px) {

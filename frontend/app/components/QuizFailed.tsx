@@ -32,14 +32,14 @@ export default function QuizFailed({ countryName }: { countryName: string }) {
         }
 
         .sorry-title {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 96px;
           line-height: 100%;
           letter-spacing: 0%;
           text-transform: capitalize;
           color: white;
-          margin: 0;
+          margin-top: 30px;
         }
 
         .sad-globe-wrap {
@@ -51,7 +51,7 @@ export default function QuizFailed({ countryName }: { countryName: string }) {
         }
 
         .failed-message {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 32px;
           line-height: 100%;
@@ -60,7 +60,7 @@ export default function QuizFailed({ countryName }: { countryName: string }) {
           text-transform: uppercase;
           color: white;
           margin: 0;
-          max-width: 600px;
+          max-width: 700px;
         }
 
         .back-btn {

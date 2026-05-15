@@ -70,8 +70,7 @@ export default function AsiaPage() {
         /* ── Reused from map page exactly ── */
         .map-title {
           position: absolute;
-          top: -20px;
-          left: 50px;
+          left: 10px;
           color: white;
           z-index: 3;
           margin: 0;
@@ -108,7 +107,7 @@ export default function AsiaPage() {
           margin-top: 100px;
           margin-left: auto;
           margin-right: auto;
-          width: 75%;
+          width: 72%;
           height: auto;
           z-index: 1;
         }
@@ -175,7 +174,7 @@ export default function AsiaPage() {
         <Navbar />
 
         <div className="continent-inner">
-          <h1 className="header1_v2 map-title">ASIA</h1>
+          <h1 className="header1_v2 map-title">WHERE TO NEXT?</h1>
 
           <div className="stamp-badge">
             <Image src="/map/star.png" alt="star" width={30} height={30} />
@@ -196,7 +195,7 @@ export default function AsiaPage() {
                 height: "auto",
                 display: "block",
                 scale: "0.8",
-                transform: "translateY(-50px)",
+                transform: "translateY(-10px)",
               }}
               priority
             />
@@ -204,7 +203,7 @@ export default function AsiaPage() {
             {/* China pin — adjust top/left once you see your image */}
             <button
               className="pin-btn"
-              style={{ top: "25%", left: "62%" }}
+              style={{ top: "30%", left: "62%" }}
               onClick={() => router.push("/map/asia/china")}
               aria-label="Explore China"
             >

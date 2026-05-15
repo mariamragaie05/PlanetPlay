@@ -501,7 +501,7 @@ export default function PostcardStudioPage() {
         >
           <h1
             style={{
-              fontFamily: "var(--font-gafiton), sans-serif",
+              fontFamily: "Gafiton, sans-serif",
               fontWeight: 400,
               fontSize: 48,
               lineHeight: "100%",
@@ -628,7 +628,7 @@ export default function PostcardStudioPage() {
                   onClick={() => toggleCategory(cat.key)}
                   className="sidebar-btn"
                   style={{
-                    width: 210,
+                    width: 220,
                     height: 86,
                     background: "#2E43BB",
                     border: "1px solid #000",
@@ -647,7 +647,7 @@ export default function PostcardStudioPage() {
                   />
                   <span
                     style={{
-                      fontFamily: "var(--font-gafiton), sans-serif",
+                      fontFamily: "Gafiton, sans-serif",
                       fontWeight: 400,
                       fontSize: 20,
                       lineHeight: "106%",
@@ -665,7 +665,7 @@ export default function PostcardStudioPage() {
                 {activeCategory === cat.key && (
                   <div
                     style={{
-                      width: 195,
+                      width: 230,
                       height: 440,
                       background: "#2E43BB",
                       border: "1px solid #000",
@@ -743,18 +743,13 @@ export default function PostcardStudioPage() {
           <button
             onClick={() => setShowTitlePopup(true)}
             disabled={saving}
-            className="action-btn"
+            className="action-btn subtitle_v2"
             style={{
               height: 44,
               padding: "0 24px",
               background: "#ffffff",
               border: "1px solid #000",
               cursor: saving ? "default" : "pointer",
-              fontFamily: "var(--font-gafiton), sans-serif",
-              fontWeight: 400,
-              fontSize: 16,
-              letterSpacing: 0,
-              textTransform: "uppercase",
               color: "#000000",
               opacity: saving ? 0.6 : 1,
               transition: "transform 0.1s ease, box-shadow 0.1s ease",
@@ -765,18 +760,13 @@ export default function PostcardStudioPage() {
 
           <button
             onClick={handleShare}
-            className="action-btn"
+            className="action-btn subtitle_v2"
             style={{
               height: 44,
               padding: "0 24px",
               background: "#ffffff",
               border: "1px solid #000",
               cursor: "pointer",
-              fontFamily: "var(--font-gafiton), sans-serif",
-              fontWeight: 400,
-              fontSize: 16,
-              letterSpacing: 0,
-              textTransform: "uppercase",
               color: "#000000",
               transition: "transform 0.1s ease, box-shadow 0.1s ease",
             }}
@@ -810,11 +800,20 @@ export default function PostcardStudioPage() {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-end",
+                  justifyContent: "space-between",
                   padding: "8px 12px",
                   borderBottom: "1px solid #000",
                 }}
               >
+                <span
+                  className="body"
+                  style={{
+                    color: "#000",
+                    transform: "translateY(5px)",
+                  }}
+                >
+                  Add a title to your postcard
+                </span>
                 <button
                   onClick={() => setShowTitlePopup(false)}
                   style={{
@@ -855,15 +854,6 @@ export default function PostcardStudioPage() {
                     </div>
                   </div>
                 )}
-                <span
-                  style={{
-                    fontFamily: "var(--font-gafiton), sans-serif",
-                    fontSize: 20,
-                    color: "#000",
-                  }}
-                >
-                  Add a title to your postcard
-                </span>
 
                 <input
                   type="text"
@@ -875,7 +865,7 @@ export default function PostcardStudioPage() {
                     border: "1px solid #000",
                     padding: "0 10px",
                     fontSize: 16,
-                    fontFamily: "var(--font-gafiton), sans-serif",
+                    fontFamily: " sans-serif",
                     color: "#000000",
                   }}
                 />
@@ -889,7 +879,7 @@ export default function PostcardStudioPage() {
                     background: "#ffffff",
                     border: "1px solid #000",
                     cursor: "pointer",
-                    fontFamily: "var(--font-gafiton), sans-serif",
+                    fontFamily: " sans-serif",
                     fontSize: 16,
                     textTransform: "uppercase",
                     color: "#000000",
@@ -927,11 +917,20 @@ export default function PostcardStudioPage() {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-end",
+                  justifyContent: "space-between",
                   padding: "8px 12px",
                   borderBottom: "1px solid #000",
                 }}
               >
+                <span
+                  className="body"
+                  style={{
+                    color: "#000",
+                    transform: "translateY(5px)",
+                  }}
+                >
+                  Download your postcard
+                </span>
                 <button
                   onClick={() => setShowSharePopup(false)}
                   style={{
@@ -955,23 +954,11 @@ export default function PostcardStudioPage() {
                   gap: 16,
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "var(--font-gafiton), sans-serif",
-                    fontSize: 20,
-                    color: "#000",
-                  }}
-                >
-                  Download your postcard
-                </span>
-
                 <p
+                  className="body"
                   style={{
-                    fontFamily: "var(--font-gafiton), sans-serif",
-                    fontSize: 14,
                     color: "#333",
                     margin: 0,
-                    lineHeight: 1.4,
                   }}
                 >
                   {generatingShare
@@ -995,7 +982,7 @@ export default function PostcardStudioPage() {
                       background: "#ffffff",
                       border: "1px solid #000",
                       cursor: "pointer",
-                      fontFamily: "var(--font-gafiton), sans-serif",
+                      fontFamily: " sans-serif",
                       fontSize: 16,
                       textTransform: "uppercase",
                       color: "#000000",
@@ -1066,7 +1053,7 @@ export default function PostcardStudioPage() {
   border-right: 10px solid var(--yellow-primary);
 }
 .speech-bubble-text {
-  font-family: var(--font-gafiton), sans-serif;
+  font-family: Gafiton, sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #000;

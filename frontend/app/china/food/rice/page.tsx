@@ -269,7 +269,7 @@ export default function FriedRice() {
                       ? 80
                       : ing.id === "boiledegg" || ing.id === "shrimp"
                         ? 40
-                        : 12,
+                        : 18,
                   opacity: alreadyAdded ? 0 : 1,
                   transition: "opacity 0.3s",
                   cursor: alreadyAdded ? "default" : "grab",
@@ -296,7 +296,7 @@ export default function FriedRice() {
                 />
                 <span
                   style={{
-                    fontFamily: "'Fredoka', sans-serif", // replace with Gafiton when available
+                    fontFamily: "Gafiton", // replace with Gafiton when available
                     fontWeight: 400,
                     fontSize: 20,
                     lineHeight: "100%",
@@ -426,7 +426,7 @@ export default function FriedRice() {
 }
 
 .ai-hint-text {
-  font-family: var(--font-gafiton), sans-serif;
+  font-family: "Gafiton", sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #000;
@@ -558,7 +558,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
 
         <span
           style={{
-            fontFamily: "'Fredoka', sans-serif",
+            fontFamily: "Gafiton",
             fontWeight: 400,
             fontSize: 24,
             color: "var(--yellow-primary)",
@@ -653,7 +653,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
       {/* Congratulations */}
       <span
         style={{
-          fontFamily: "'Fredoka', sans-serif", // replace with Gafiton
+          fontFamily: "Gafiton", // replace with Gafiton
           fontWeight: 400,
           fontSize: 40,
           lineHeight: "100%",
@@ -669,7 +669,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
       {/* Subtitle */}
       <span
         style={{
-          fontFamily: "'Fredoka', sans-serif",
+          fontFamily: "Gafiton",
           fontWeight: 400,
           fontSize: 20,
           lineHeight: "100%",

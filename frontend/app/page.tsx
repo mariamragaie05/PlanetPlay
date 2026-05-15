@@ -51,8 +51,10 @@ export default function Home() {
               style={{
                 color: "var(--yellow-primary)",
                 marginBottom: "32px",
+                marginTop: "32px",
                 WebkitTextStroke: "2px rgba(0,0,0,0.12)",
                 textShadow: "4px 4px 0px rgba(0,0,0,0.15)",
+                width: "900px",
               }}
             >
               Travel The World
@@ -499,27 +501,18 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-4">
             <div className="mx-auto max-w-2xl text-center">
               <h2
+                className="header1_v2"
                 style={{
-                  fontFamily: "var(--font-gafiton)",
-                  fontWeight: 400,
-                  fontSize: "76px",
-                  lineHeight: "100%",
                   textAlign: "center",
-                  textTransform: "capitalize",
                   color: "#FF6CB7",
                 }}
               >
                 Testimonials
               </h2>
               <p
-                className="mt-4"
+                className="mt-4 header3_v3"
                 style={{
-                  fontFamily: "var(--font-gafiton)",
-                  fontWeight: 400,
-                  fontSize: "36px",
-                  lineHeight: "100%",
                   textAlign: "center",
-                  textTransform: "capitalize",
                 }}
               >
                 See What Our Little Explorers And Their Parents Have To Say!

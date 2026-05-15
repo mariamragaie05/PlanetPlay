@@ -285,7 +285,7 @@ export default function Dashboard() {
         }
 
         .postcards-inner {
-          max-width: 1200px;
+          max-width: 1300px;
           margin: 0 auto;
           display: grid;
           grid-template-columns: 1fr;
@@ -303,6 +303,7 @@ export default function Dashboard() {
           color: var(--pink-primary);
           margin-bottom: 12px;
           text-align: left;
+          transform: translateX(-100px);
         }
 
         .postcards-subtitle {
@@ -310,6 +311,7 @@ export default function Dashboard() {
           margin-bottom: 12px;
           text-align: left;
           width: 796px;
+          transform: translateX(-100px);
         }
 
         .postcards-desc {
@@ -317,6 +319,7 @@ export default function Dashboard() {
           text-align: left !important;
           margin-bottom: 32px;
           max-width: 684px;
+          transform: translateX(-100px);
         }
 
         .see-btn {
@@ -342,6 +345,7 @@ export default function Dashboard() {
           width: 100%;
            display: flex;
   justify-content: center;
+  margin-top: 40px;
         }
 
         .postcard-img {
@@ -433,6 +437,7 @@ export default function Dashboard() {
         .spotlight-title {
           color: var(--yellow-primary);
           margin-bottom: 40px;
+          padding-top: 20px;
           text-align: left;
         }
 
@@ -504,18 +509,21 @@ export default function Dashboard() {
           color: var(--yellow-primary);
           margin-bottom: 8px;
           text-align: left;
+          transform: translateY(50px);
         }
 
         .spotlight-label {
           color: var(--black-neutral);
           margin-bottom: 12px;
           text-align: left;
+          transform: translateY(50px);
         }
 
         .spotlight-desc {
           color: var(--black-neutral);
           text-align: left !important;
           max-width: 400px;
+          transform: translateY(50px);
         }
 
         @media (max-width: 1024px) {
@@ -611,7 +619,7 @@ export default function Dashboard() {
 }
 
 .speech-bubble-text {
-  font-family: var(--font-gafiton), sans-serif;
+  font-family: Gafiton, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: var(--black-neutral);

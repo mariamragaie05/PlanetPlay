@@ -300,7 +300,7 @@ export default function PostcardCollectionPage() {
           <span
             style={{
               color: "#fff",
-              fontFamily: "var(--font-gafiton), sans-serif",
+              fontFamily: "Gafiton, sans-serif",
               fontSize: 24,
             }}
           >
@@ -340,7 +340,7 @@ export default function PostcardCollectionPage() {
           {/* Title */}
           <h1
             style={{
-              fontFamily: "var(--font-gafiton), sans-serif",
+              fontFamily: "Gafiton, sans-serif",
               fontWeight: 400,
               fontSize: 48,
               lineHeight: "100%",
@@ -356,7 +356,7 @@ export default function PostcardCollectionPage() {
           {/* Subtitle */}
           <p
             style={{
-              fontFamily: "var(--font-gafiton), sans-serif",
+              fontFamily: "Gafiton, sans-serif",
               fontWeight: 400,
               fontSize: 20,
               lineHeight: "106%",
@@ -395,7 +395,7 @@ export default function PostcardCollectionPage() {
                   {postcard && (
                     <span
                       style={{
-                        fontFamily: "var(--font-gafiton), sans-serif",
+                        fontFamily: "Gafiton, sans-serif",
                         fontWeight: 400,
                         fontSize: 24,
                         letterSpacing: "0%",
@@ -466,7 +466,7 @@ export default function PostcardCollectionPage() {
           {/* Title */}
           <h1
             style={{
-              fontFamily: "var(--font-gafiton), sans-serif",
+              fontFamily: "Gafiton, sans-serif",
               fontWeight: 400,
               fontSize: 72,
               lineHeight: "100%",
@@ -484,7 +484,7 @@ export default function PostcardCollectionPage() {
           {/* Subtitle */}
           <p
             style={{
-              fontFamily: "var(--font-gafiton), sans-serif",
+              fontFamily: "Gafiton, sans-serif",
               fontWeight: 400,
               fontSize: 48,
               lineHeight: "100%",
@@ -502,7 +502,7 @@ export default function PostcardCollectionPage() {
           {/* Visited country hint */}
           <p
             style={{
-              fontFamily: "var(--font-gafiton), sans-serif",
+              fontFamily: "Gafiton, sans-serif",
               fontWeight: 400,
               fontSize: 18,
               lineHeight: "106%",
@@ -561,7 +561,7 @@ export default function PostcardCollectionPage() {
         {/* Title */}
         <h1
           style={{
-            fontFamily: "var(--font-gafiton), sans-serif",
+            fontFamily: "Gafiton, sans-serif",
             fontWeight: 400,
             fontSize: 72,
             lineHeight: "100%",
@@ -579,7 +579,7 @@ export default function PostcardCollectionPage() {
         {/* No visits message */}
         <p
           style={{
-            fontFamily: "var(--font-gafiton), sans-serif",
+            fontFamily: "Gafiton, sans-serif",
             fontWeight: 400,
             fontSize: 18,
             lineHeight: "106%",

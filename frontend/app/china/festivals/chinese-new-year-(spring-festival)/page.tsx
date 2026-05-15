@@ -537,7 +537,7 @@ export default function ChineseNewYearPage() {
         >
           <span
             style={{
-              fontFamily: "'Fredoka', sans-serif",
+              fontFamily: "Gafiton",
               fontWeight: 400,
               fontSize: 40,
               lineHeight: "100%",
@@ -552,7 +552,7 @@ export default function ChineseNewYearPage() {
 
           <span
             style={{
-              fontFamily: "'Fredoka', sans-serif",
+              fontFamily: "Gafiton",
               fontWeight: 400,
               fontSize: 20,
               lineHeight: "100%",
@@ -715,7 +715,8 @@ export default function ChineseNewYearPage() {
         <div
           className="header3_v3"
           style={{
-            color: "#FFD84D",
+            color: "var(--yellow-primary)",
+            transform: "translateY(10px)",
           }}
         >
           Chinese New Year
@@ -726,7 +727,7 @@ export default function ChineseNewYearPage() {
         <p
           className="body_v2"
           style={{
-            color: "#FFD84D",
+            color: "var(--yellow-primary)",
             maxWidth: 557,
           }}
         >
@@ -830,7 +831,7 @@ export default function ChineseNewYearPage() {
             >
               <p
                 style={{
-                  fontFamily: "'Fredoka', sans-serif",
+                  fontFamily: "Gafiton",
                   fontWeight: 400,
                   fontSize: 32,
                   lineHeight: "100%",

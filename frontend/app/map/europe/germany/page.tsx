@@ -1,17 +1,71 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import Navbar from "../../../components/Navbar";
 
 export default function GermanyPage() {
   const router = useRouter();
+  const [showText, setShowText] = useState(false);
+  const [completedStamps, setCompletedStamps] = useState<number | null>(null);
+  const [totalCountries, setTotalCountries] = useState<number | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowText(true);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const getUserIdFromToken = () => {
+      const token = localStorage.getItem("token");
+      if (!token) return null;
+      try {
+        const base64Url = token.split(".")[1] || "";
+        const base64 = base64Url
+          .replace(/-/g, "+")
+          .replace(/_/g, "/")
+          .padEnd(base64Url.length + ((4 - (base64Url.length % 4)) % 4), "=");
+        return JSON.parse(atob(base64))?.id;
+      } catch {
+        return null;
+      }
+    };
+
+    const fetchCounts = async () => {
+      try {
+        const countryRes = await fetch("http://localhost:5000/api/countries");
+        if (countryRes.ok) {
+          const countries = await countryRes.json();
+          setTotalCountries(Array.isArray(countries) ? countries.length : 0);
+        }
+
+        const userId = getUserIdFromToken();
+        if (!userId) return;
+
+        const stampRes = await fetch(
+          `http://localhost:5000/api/progress/user/${userId}/stamps`,
+        );
+        if (stampRes.ok) {
+          const data = await stampRes.json();
+          setCompletedStamps(data.stampCount || 0);
+        }
+      } catch (error) {
+        console.error("Failed to load stamp counts", error);
+      }
+    };
+
+    fetchCounts();
+  }, []);
 
   return (
     <>
       <style>{`
         .country-page {
           background-color: var(--blue-primary);
-          min-height: 100vh;
+          max-height: 100vh;
           position: relative;
           overflow: hidden;
         }
@@ -26,7 +80,7 @@ export default function GermanyPage() {
         .country-header {
           position: absolute;
           top: -100px;
-          left: 90px;
+          left: 10px;
           display: flex;
           align-items: center;
           gap: 16px;
@@ -34,19 +88,20 @@ export default function GermanyPage() {
         }
 
         .country-name {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: Gafiton, sans-serif;
           font-weight: 400;
           font-size: 56px;
           line-height: 100%;
           color: white;
           text-transform: capitalize;
           margin: 0;
+          transform: translateY(10px);
         }
 
         .stamp-badge {
           position: absolute;
           top: -105px;
-          right: 90px;
+          right: -10px;
           background-color: var(--pink-primary);
           width: 216px;
           height: 60px;
@@ -71,8 +126,9 @@ export default function GermanyPage() {
         .country-map-container {
           position: relative;
           margin-top: 200px;
-          margin-left: 90px;
-          width: 1200px;
+          margin-left: auto;
+          margin-right: auto;
+          width: 57%;
           z-index: 1;
         }
 
@@ -88,7 +144,7 @@ export default function GermanyPage() {
         }
 
         .country-tagline {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 96px;
           line-height: 100%;
@@ -99,33 +155,24 @@ export default function GermanyPage() {
           text-shadow: 2px 4px 0px rgba(0,0,0,0.2);
           margin: 0;
           padding: 0 40px;
-        }
-
-        .start-btn {
-          display: inline-block;
-          background: white;
-          color: var(--black-neutral);
-          border: 3px solid var(--black-neutral);
-          padding: 12px 52px;
-          text-decoration: none;
+          pointer-events: auto;
           cursor: pointer;
-          transition: all 0.15s;
-          font-family: Helvetica, Arial, sans-serif;
-          font-weight: 700;
-          font-size: 20px;
-          letter-spacing: 5%;
-          text-transform: uppercase;
+          opacity: 0;
+          transform: translateY(-20px);
+          transition: opacity 0.6s ease, transform 0.6s ease;
+          width:1250px
         }
+           .country-tagline.visible {
+          opacity: 1;
+          transform: translateY(-40px);
+        }
+          .country-tagline:hover {
+          transform: translateY(-40px) scale(1.04);
+          filter: drop-shadow(0 0 12px rgba(255, 216, 77, 0.7));
 
-        .start-btn:hover {
-          transform: translate(-2px, -2px);
-          box-shadow: 6px 6px 0px var(--yellow-primary);
-        }
+      }
 
-        .start-btn:active {
-          transform: translate(4px, 4px);
-          box-shadow: none;
-        }
+      
 
         @media (max-width: 1350px) {
           .country-map-container {
@@ -142,7 +189,6 @@ export default function GermanyPage() {
           .stamp-count { font-size: 24px; }
           .country-map-container { margin-top: 180px; margin-left: 16px; width: calc(100vw - 32px); }
           .country-tagline { font-size: 40px; }
-          .start-btn { font-size: 16px; padding: 10px 36px; }
         }
 
         @media (max-width: 480px) {
@@ -171,7 +217,10 @@ export default function GermanyPage() {
           {/* Stamp badge */}
           <div className="stamp-badge">
             <Image src="/map/star.png" alt="star" width={30} height={30} />
-            <span className="stamp-count">0/1</span>
+            <span className="stamp-count">
+              {completedStamps === null ? "..." : completedStamps}/
+              {totalCountries === null ? "..." : totalCountries}
+            </span>
           </div>
 
           {/* Country map image + overlay */}
@@ -191,17 +240,14 @@ export default function GermanyPage() {
             />
 
             <div className="country-overlay">
-              <p className="country-tagline">
+              <p
+                className={`country-tagline ${showText ? "visible" : ""}`}
+                onClick={() => router.push("/germany")}
+              >
                 Let&apos;s Enter Germany
                 <br />
                 And Explore It!
               </p>
-              <button
-                className="subtitle_v2 start-btn"
-                onClick={() => router.push("/map/europe/germany/explore")}
-              >
-                START
-              </button>
             </div>
           </div>
         </div>

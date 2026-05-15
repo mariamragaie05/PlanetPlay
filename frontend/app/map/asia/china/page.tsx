@@ -88,13 +88,14 @@ export default function ChinaPage() {
         }
 
         .country-name {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 56px;
           line-height: 100%;
           color: white;
           text-transform: capitalize;
           margin: 0;
+         transform: translateY(10px);
         }
 
         /* Stamp badge — top right */
@@ -148,7 +149,7 @@ export default function ChinaPage() {
         }
 
         .country-tagline {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 96px;
           line-height: 100%;
@@ -164,6 +165,7 @@ export default function ChinaPage() {
           opacity: 0;
           transform: translateY(-20px);
           transition: opacity 0.6s ease, transform 0.6s ease;
+          width:1200px
         }
 
         .country-tagline.visible {

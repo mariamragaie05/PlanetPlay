@@ -11,7 +11,7 @@ export default function EuropePage() {
       <style>{`
         .continent-page {
           background-color: var(--blue-primary);
-          min-height: 100vh;
+          max-height: 100vh;
           position: relative;
           overflow: hidden;
         }
@@ -27,7 +27,7 @@ export default function EuropePage() {
         .map-title {
           position: absolute;
           top: -100px;
-          left: 90px;
+          left: 10px;
           color: white;
           z-index: 3;
           margin: 0;
@@ -62,8 +62,9 @@ export default function EuropePage() {
         .continent-container {
           position: relative;
           margin-top: 200px;
-          margin-left: 90px;
-          width: 1200px;
+          margin-left: auto;
+          margin-right: auto;
+          width: 70%;
           height: 680px;
           z-index: 1;
         }
@@ -130,7 +131,7 @@ export default function EuropePage() {
         <Navbar />
 
         <div className="continent-inner">
-          <h1 className="header1_v2 map-title">EUROPE</h1>
+          <h1 className="header1_v2 map-title">WHERE TO NEXT?</h1>
 
           <div className="stamp-badge">
             <Image src="/map/star.png" alt="star" width={30} height={30} />

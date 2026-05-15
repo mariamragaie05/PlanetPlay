@@ -72,19 +72,19 @@ export default function FoodPage({ countryName, foodImages }: FoodPageProps) {
         }
 
         .food-title {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(28px, 3.3vw, 48px);
           line-height: 100%;
           letter-spacing: 0.03em;
           text-transform: uppercase;
           color: var(--yellow-primary);
-          margin: 0 0 10px 0;
+          margin: 10px 0 10px 0;
           padding-top: 16px;
         }
 
         .food-subtitle {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(12px, 1.4vw, 20px);
           line-height: 100%;
@@ -101,7 +101,7 @@ export default function FoodPage({ countryName, foodImages }: FoodPageProps) {
           grid-template-columns: repeat(3, 1fr);
           gap: 2px;
           align-items: center;
-          padding: 32px 0 28px;
+          padding: 12px 0 28px;
         }
 
         .food-card {
@@ -140,7 +140,7 @@ export default function FoodPage({ countryName, foodImages }: FoodPageProps) {
         }
 
         .food-name {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(16px, 2.2vw, 32px);
           line-height: 100%;

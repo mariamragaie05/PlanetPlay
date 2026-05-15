@@ -36,7 +36,7 @@ export default function QuizPassed({ countryName }: { countryName: string }) {
         }
 
         .congrats-title {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 40px;
           line-height: 100%;
@@ -44,11 +44,11 @@ export default function QuizPassed({ countryName }: { countryName: string }) {
           text-align: center;
           text-transform: uppercase;
           color: var(--yellow-primary);
-          margin: 0 0 10px 0;
+          margin: 10px 0 10px 0;
         }
 
         .congrats-sub {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 20px;
           line-height: 100%;

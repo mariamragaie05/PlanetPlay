@@ -293,12 +293,12 @@ export default function TheCairoTowerPage() {
             alignItems: "center",
             gap: 12,
             zIndex: 5,
-            marginTop: 80,
+            marginTop: 90,
           }}
         >
           <span
             style={{
-              fontFamily: "'Fredoka', sans-serif",
+              fontFamily: "Gafiton",
               fontWeight: 400,
               fontSize: 40,
               lineHeight: "100%",
@@ -313,7 +313,7 @@ export default function TheCairoTowerPage() {
 
           <span
             style={{
-              fontFamily: "'Fredoka', sans-serif",
+              fontFamily: "Gafiton",
               fontWeight: 400,
               fontSize: 20,
               lineHeight: "100%",
@@ -526,7 +526,7 @@ export default function TheCairoTowerPage() {
             >
               <p
                 style={{
-                  fontFamily: "'Fredoka', sans-serif",
+                  fontFamily: "Gafiton",
                   fontWeight: 400,
                   fontSize: 32,
                   lineHeight: "100%",

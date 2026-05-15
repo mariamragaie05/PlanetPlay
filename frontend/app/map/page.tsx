@@ -70,7 +70,7 @@ export default function MapPage() {
 
         .map-title {
           position: absolute;
-          top: -90px;
+          top: -70px;
           left: 50px;
           color: white;
           z-index: 3;

@@ -194,7 +194,7 @@ export default function ViewedPassportPage() {
                   position: "absolute",
                   bottom: "53%",
                   left: "9%",
-                  fontFamily: "var(--font-gafiton), sans-serif",
+                  fontFamily: "Gafiton, sans-serif",
                   fontWeight: 400,
                   fontSize: 32,
                   lineHeight: "100%",

@@ -70,8 +70,7 @@ export default function AfricaPage() {
 
         .map-title {
           position: absolute;
-          top: -20px;
-          left: 50px;
+          left: 10px;
           color: white;
           z-index: 3;
           margin: 0;
@@ -107,7 +106,7 @@ export default function AfricaPage() {
           margin-top: 100px;
           margin-left: auto;
           margin-right: auto;
-          width: 85%;
+          width: 75%;
           height: auto;
           z-index: 1;
         }
@@ -172,7 +171,7 @@ export default function AfricaPage() {
         <Navbar />
 
         <div className="continent-inner">
-          <h1 className="header1_v2 map-title">AFRICA</h1>
+          <h1 className="header1_v2 map-title">WHERE TO NEXT?</h1>
 
           <div className="stamp-badge">
             <Image src="/map/star.png" alt="star" width={30} height={30} />
@@ -193,7 +192,7 @@ export default function AfricaPage() {
                 height: "auto",
                 display: "block",
                 scale: "1",
-                transform: "translateY(-50px)",
+                transform: "translateY(20px)",
               }}
               priority
             />
@@ -201,7 +200,7 @@ export default function AfricaPage() {
             {/* Egypt pin — adjust top/left once you see your image */}
             <button
               className="pin-btn"
-              style={{ top: "8%", left: "52%" }}
+              style={{ top: "15%", left: "52%" }}
               onClick={() => router.push("/map/africa/egypt")}
               aria-label="Explore Egypt"
             >

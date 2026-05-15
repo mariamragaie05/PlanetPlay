@@ -93,7 +93,9 @@ export default function Koshari() {
   const totalIngredients = INGREDIENTS.length;
   const step = addedIngredients.length;
   const isCompleted = step >= totalIngredients;
-  const nextIngredient = INGREDIENTS.find((ing) => !addedIngredients.includes(ing.id));
+  const nextIngredient = INGREDIENTS.find(
+    (ing) => !addedIngredients.includes(ing.id),
+  );
 
   // ── Drag & Drop handlers ──────────────────
 
@@ -119,12 +121,23 @@ export default function Koshari() {
       setDraggingId(null);
       return;
     }
+    const expectedId = INGREDIENTS[step]?.id;
 
-    const newStep = step + 1;
-    setAddedIngredients((prev) => [...prev, id]);
-    if (newStep >= totalIngredients) {
-      setTimeout(() => setDone(true), 600);
+    if (id === expectedId) {
+      // ✅ Correct ingredient
+      const newStep = step + 1;
+
+      setAddedIngredients((prev) => [...prev, id]);
+
+      if (newStep >= totalIngredients) {
+        setTimeout(() => setDone(true), 600);
+      }
+    } else {
+      // ❌ Wrong ingredient → shake
+      setShaking(id);
+      setTimeout(() => setShaking(null), 600);
     }
+
     setDraggingId(null);
   };
 
@@ -248,7 +261,7 @@ export default function Koshari() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: ing.id == "tomatosauce" || ing.id == "daqqah" ? 42 : 12,
+                  gap: ing.id == "tomatosauce" || ing.id == "daqqah" ? 48 : 24,
                   opacity: alreadyAdded ? 0 : 1,
                   transition: "opacity 0.3s",
                   cursor: alreadyAdded ? "default" : "grab",
@@ -275,7 +288,7 @@ export default function Koshari() {
                 />
                 <span
                   style={{
-                    fontFamily: "'Fredoka', sans-serif", // replace with Gafiton when available
+                    fontFamily: "Gafiton", // replace with Gafiton when available
                     fontWeight: 400,
                     fontSize: 20,
                     lineHeight: "100%",
@@ -336,7 +349,11 @@ export default function Koshari() {
             />
             <div className="ai-hint-bubble">
               <p className="ai-hint-text">
-                Next up: <strong>{nextIngredient?.label ?? "any remaining ingredient"}</strong> 🍳
+                Next up:{" "}
+                <strong>
+                  {nextIngredient?.label ?? "any remaining ingredient"}
+                </strong>{" "}
+                🍳
               </p>
             </div>
           </div>
@@ -405,7 +422,7 @@ export default function Koshari() {
 }
 
 .ai-hint-text {
-  font-family: var(--font-gafiton), sans-serif;
+  font-family: Gafiton, sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #000;
@@ -537,7 +554,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
 
         <span
           style={{
-            fontFamily: "'Fredoka', sans-serif",
+            fontFamily: "Gafiton",
             fontWeight: 400,
             fontSize: 24,
             color: "var(--yellow-primary)",
@@ -632,7 +649,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
       {/* Congratulations */}
       <span
         style={{
-          fontFamily: "'Fredoka', sans-serif", // replace with Gafiton
+          fontFamily: "Gafiton",
           fontWeight: 400,
           fontSize: 40,
           lineHeight: "100%",
@@ -649,7 +666,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
       {/* Subtitle */}
       <span
         style={{
-          fontFamily: "'Fredoka', sans-serif",
+          fontFamily: "Gafiton",
           fontWeight: 400,
           fontSize: 20,
           lineHeight: "100%",

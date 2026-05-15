@@ -106,7 +106,7 @@ export default function QuizPage({ countryName }: { countryName: string }) {
         }}
       >
         <Navbar />
-        <p style={{ color: "white", fontFamily: "Helvetica", fontSize: 24 }}>
+        <p style={{ color: "white", fontFamily: "Gafiton", fontSize: 24 }}>
           Loading quiz...
         </p>
       </div>
@@ -124,7 +124,7 @@ export default function QuizPage({ countryName }: { countryName: string }) {
         }}
       >
         <Navbar />
-        <p style={{ color: "white", fontFamily: "Helvetica", fontSize: 24 }}>
+        <p style={{ color: "white", fontFamily: "Gafiton", fontSize: 24 }}>
           Could not load quiz.
         </p>
       </div>
@@ -391,7 +391,7 @@ export default function QuizPage({ countryName }: { countryName: string }) {
         }
 
         .question-text {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: 72px;
           line-height: 100%;

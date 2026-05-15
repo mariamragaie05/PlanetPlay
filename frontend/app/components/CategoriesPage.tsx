@@ -43,7 +43,7 @@ export default function CategoriesPage({
 
         /* ── Header text ── */
         .cat-title {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(28px, 3.3vw, 48px);
           line-height: 100%;
@@ -51,11 +51,11 @@ export default function CategoriesPage({
           text-transform: capitalize;
           color: var(--yellow-primary);
           margin: 0 0 10px 0;
-          padding-top: 16px;
+          padding-top: 24px;
         }
 
         .cat-subtitle {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family:"Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(12px, 1.4vw, 20px);
           line-height: 100%;
@@ -67,7 +67,7 @@ export default function CategoriesPage({
 
         /* ── Category label ── */
         .cat-label {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(22px, 2.8vw, 40px);
           line-height: 100%;
@@ -79,7 +79,7 @@ export default function CategoriesPage({
         }
 
         .cat-tag {
-          font-family: var(--font-gafiton), sans-serif;
+          font-family: "Gafiton", sans-serif;
           font-weight: 400;
           font-size: clamp(11px, 1.4vw, 20px);
           line-height: 100%;

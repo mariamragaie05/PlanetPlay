@@ -347,12 +347,12 @@ export default function TempleOfHeavenPage() {
             alignItems: "center",
             gap: 12,
             zIndex: 5,
-            marginTop: 70,
+            marginTop: 90,
           }}
         >
           <span
             style={{
-              fontFamily: "'Fredoka', sans-serif",
+              fontFamily: "Gafiton",
               fontWeight: 400,
               fontSize: 40,
               lineHeight: "100%",
@@ -367,7 +367,7 @@ export default function TempleOfHeavenPage() {
 
           <span
             style={{
-              fontFamily: "'Fredoka', sans-serif",
+              fontFamily: "Gafiton",
               fontWeight: 400,
               fontSize: 20,
               lineHeight: "100%",
@@ -597,7 +597,7 @@ export default function TempleOfHeavenPage() {
             >
               <p
                 style={{
-                  fontFamily: "'Fredoka', sans-serif",
+                  fontFamily: "Gafiton",
                   fontWeight: 400,
                   fontSize: 32,
                   lineHeight: "100%",
