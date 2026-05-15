@@ -119,7 +119,7 @@ const seed = async () => {
         'The name means "smelling the breeze" in Arabic.',
         "Families traditionally eat salted fish, spring onions, lettuce, and coloured eggs on this day.",
         "It is always celebrated on the Monday following Coptic Easter.",
-        "Coloured eggs during Sham El-Nessim predate Easter egg traditions in Europe by thousands of years.",
+        "kids paint eggs in bright colours to celebrate the arrival of spring.",
       ],
     },
     {
@@ -408,25 +408,8 @@ const seed = async () => {
       },
       {
         question: "What symbol appears in the centre of the Egyptian flag?",
-        options: [
-          "A pyramid",
-          "The Eagle of Saladin",
-          "The Sphinx",
-          "A crescent moon",
-        ],
-        correctAnswer: "The Eagle of Saladin",
-      },
-      {
-        question:
-          "The Great Pyramid of Giza was built as a tomb for which Pharaoh?",
-        options: ["Ramesses II", "Tutankhamun", "Khufu", "Khafre"],
-        correctAnswer: "Khufu",
-      },
-      {
-        question:
-          "Approximately how many stone blocks make up the Great Pyramid of Giza?",
-        options: ["500,000", "1 million", "2.3 million", "5 million"],
-        correctAnswer: "2.3 million",
+        options: ["A pyramid", "An Eagle", "The Sphinx", "A crescent moon"],
+        correctAnswer: "An Eagle",
       },
       {
         question: "How tall is the Cairo Tower?",
@@ -454,14 +437,14 @@ const seed = async () => {
         correctAnswer: "Smelling the breeze",
       },
       {
-        question: "When does the Abu Simbel Sun Festival occur?",
+        question: "When is Sham El-Nessim celebrated?",
         options: [
-          "January 1st and July 1st",
-          "March 21st and September 21st",
-          "February 22nd and October 22nd",
-          "April 15th and August 15th",
+          "Start of spring",
+          "End of spring",
+          "Start of winter",
+          "Start of summer",
         ],
-        correctAnswer: "February 22nd and October 22nd",
+        correctAnswer: "Start of spring",
       },
       {
         question: "What is Egypt's national dish?",
@@ -469,15 +452,29 @@ const seed = async () => {
         correctAnswer: "Koshari",
       },
       {
-        question:
-          "How long was the Great Pyramid the tallest man-made structure in the world?",
+        question: "What tradition do kids do during Sham El-Nessim?",
         options: [
-          "Over 1,000 years",
-          "Over 2,000 years",
-          "Over 3,800 years",
-          "Over 500 years",
+          "Paint eggs",
+          "Make lanterns",
+          "Dance in the streets",
+          "Wear costumes",
         ],
-        correctAnswer: "Over 3,800 years",
+        correctAnswer: "Paint eggs",
+      },
+      {
+        question: "What can you see from the top of Cairo Tower?",
+        options: [
+          "The Pyramids of Giza",
+          "Abu Simbel Temple",
+          "The Red Sea",
+          "The Mediterranean Sea",
+        ],
+        correctAnswer: "The Pyramids of Giza",
+      },
+      {
+        question: "What is the name of the pastry eaten during Eid Al-Fitr?",
+        options: ["Kahk", "Kunafa", "Baklava", "Basbousa"],
+        correctAnswer: "Kahk",
       },
     ],
   });

@@ -4,13 +4,41 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 
+const COUNTRY_STAMP_CONFIGS: Record<
+  string,
+  {
+    src: string;
+    top: string;
+    left: string;
+    width: number;
+    height: number;
+  }
+> = {
+  China: {
+    src: "/countries/china/stamp.png",
+    top: "75%",
+    left: "10%",
+    width: 100,
+    height: 100,
+  },
+  Egypt: {
+    src: "/countries/egypt/stamp.png",
+    top: "55%",
+    left: "20%",
+    width: 130,
+    height: 120,
+  },
+};
+
 export default function ViewedPassportPage() {
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [age, setAge] = useState("");
   const [showGif, setShowGif] = useState(true);
   const [avatar, setAvatar] = useState("avatar3");
-  const [hasChinaStamp, setHasChinaStamp] = useState(false);
+  const [earnedStampCountries, setEarnedStampCountries] = useState<string[]>(
+    [],
+  );
   const [lastCountryVisited, setLastCountryVisited] = useState("");
 
   useEffect(() => {
@@ -25,8 +53,7 @@ export default function ViewedPassportPage() {
       setShowGif(false);
     }, 3500);
 
-    // Check if user has China stamp
-    const checkChinaStamp = async () => {
+    const loadEarnedStamps = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
@@ -41,6 +68,7 @@ export default function ViewedPassportPage() {
         const countries = await countriesRes.json();
 
         let lastVisited = "";
+        const earnedCountries: string[] = [];
 
         // Check progress for each country
         for (const country of countries) {
@@ -51,20 +79,21 @@ export default function ViewedPassportPage() {
             const progress = await progressRes.json();
             if (progress.hasStamp) {
               lastVisited = country.name;
-              if (country.name === "China") {
-                setHasChinaStamp(true);
+              if (COUNTRY_STAMP_CONFIGS[country.name]) {
+                earnedCountries.push(country.name);
               }
             }
           }
         }
 
         setLastCountryVisited(lastVisited);
+        setEarnedStampCountries(Array.from(new Set(earnedCountries)));
       } catch (error) {
         console.error("Error checking stamps:", error);
       }
     };
 
-    checkChinaStamp();
+    loadEarnedStamps();
 
     return () => clearTimeout(timer);
   }, []);
@@ -285,22 +314,28 @@ export default function ViewedPassportPage() {
               </p>
             </div>
           )}
-          {/* China Stamp — only show when passport is open and user has stamp */}
-          {!showGif && hasChinaStamp && (
-            <img
-              src="/countries/china/stamp.png"
-              alt="China Stamp"
-              style={{
-                position: "absolute",
-                width: 100,
-                height: 100,
-                top: "75%",
-                left: "10%",
-                zIndex: 4,
-                pointerEvents: "none",
-              }}
-            />
-          )}
+          {/* Earned country stamps — only show when passport is open */}
+          {!showGif &&
+            earnedStampCountries.map((countryName) => {
+              const stamp = COUNTRY_STAMP_CONFIGS[countryName];
+              if (!stamp) return null;
+              return (
+                <img
+                  key={countryName}
+                  src={stamp.src}
+                  alt={`${countryName} Stamp`}
+                  style={{
+                    position: "absolute",
+                    width: stamp.width,
+                    height: stamp.height,
+                    top: stamp.top,
+                    left: stamp.left,
+                    zIndex: 4,
+                    pointerEvents: "none",
+                  }}
+                />
+              );
+            })}
         </div>
 
         {/* Bottom tape strip */}
