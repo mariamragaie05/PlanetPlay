@@ -41,12 +41,12 @@ const FRAME_COLORS = [
 ];
 
 const LANDMARK_IMAGES = [
-  "/postcard/icons/icon_landmark.png",
-  "/postcard/landmarks/landmark_2.png",
+  "/postcard/icons/icon_landmarks.png",
+  "/postcard/landmarks/landmarks_2.png",
   "/countries/china/landmarks/templeofheaven/congrats_landmark.png",
-  "/postcard/landmarks/landmark_4.png",
-  "/postcard/landmarks/landmark_5.png",
-  "/postcard/landmarks/landmark_6.png",
+  "/postcard/landmarks/landmarks_4.png",
+  "/postcard/landmarks/landmarks_5.png",
+  "/postcard/landmarks/landmarks_6.png",
 ];
 
 // Festivals index 0–3 → map to a different placed image; index 4–5 → placed directly
@@ -94,7 +94,7 @@ const CATEGORIES: { key: Category; label: string; image: string }[] = [
   {
     key: "landmark",
     label: "LANDMARK",
-    image: "/postcard/icons/icon_landmark.png",
+    image: "/postcard/icons/icon_landmarks.png",
   },
   {
     key: "festivals",
