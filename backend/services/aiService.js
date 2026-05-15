@@ -108,6 +108,8 @@ async function recommendNextCountry({ exploredCountries }) {
 
   const user = `A child has already explored these countries: ${explored}.
 Suggest 1 new country to explore next. Pick based on what they have already explored. Write the reason in a fun, exciting way for a 9-12 year old. Make sure to avoid any political or war-related words (like blow, explode, etc), and focus on fun cultural or historical facts that would excite a child.Also if possible, make sure the country recommended has something in common with all countries visited, or is a fun contrast to them.
+make sure to limit the result to just one country recommendation, and that the reason is short and exciting. make sure that the country recommended is different from all the explored countries listed above.
+Return exactly this JSON format:
 {"country": "Japan", "reason": "Since you loved exploring Chinese food and landmarks, Japan will blow your mind with sushi, samurai castles, and cherry blossoms!"}`;
 
   return callGroq(system, user);
