@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 export default function Dashboard() {
   const [firstName, setFirstName] = useState("");
   const [recommendation, setRecommendation] = useState<string>("");
+  const [displayedText, setDisplayedText] = useState<string>("");
 
   useEffect(() => {
     const name = localStorage.getItem("firstName");
@@ -45,6 +46,18 @@ export default function Dashboard() {
     };
     fetchRecommendation();
   }, []);
+
+  useEffect(() => {
+    if (!recommendation) return;
+    setDisplayedText("");
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayedText(recommendation.slice(0, i + 1));
+      i++;
+      if (i >= recommendation.length) clearInterval(interval);
+    }, 30); // 30ms per character — adjust to taste
+    return () => clearInterval(interval);
+  }, [recommendation]);
   return (
     <>
       <style>{`
@@ -586,9 +599,10 @@ export default function Dashboard() {
   position: relative;
   background: var(--yellow-primary);
   border: 2px solid var(--black-neutral);
-  padding: 12px 16px;
+  padding: 16px 20px;
   max-width: 320px;
-  border-radius: 4px;
+  border-radius: 50px;
+  margin-bottom: 50px;
 }
 
 /* Triangle pointing left toward the character */
@@ -608,7 +622,7 @@ export default function Dashboard() {
 .speech-bubble::after {
   content: "";
   position: absolute;
-  left: -9px;
+  left: -8px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
@@ -664,7 +678,12 @@ export default function Dashboard() {
                 className="ai-character"
               />
               <div className="speech-bubble">
-                <p className="body speech-bubble-text">{recommendation}</p>
+                <p className="body speech-bubble-text">
+                  {displayedText}
+                  {displayedText.length < recommendation.length && (
+                    <span style={{ opacity: 0.5 }}>|</span>
+                  )}
+                </p>{" "}
               </div>
             </div>
           )}
