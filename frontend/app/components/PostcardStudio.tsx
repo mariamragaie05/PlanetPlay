@@ -20,6 +20,17 @@ interface PlacedItem {
   height: number;
   category: string;
 }
+interface PostcardStudioProps {
+  countryName: string;
+  landmarkImages: [string, string, string, string, string, string];
+  landmarkIcon: string;
+  festivalImages: [string, string, string, string, string, string];
+  festivalIcon: string;
+  foodImages: [string, string, string, string, string, string];
+  foodIcon: string;
+  stampImages: [string, string, string, string, string, string];
+  stampIcon: string;
+}
 
 type Category = "frame" | "landmark" | "festivals" | "food" | "stamp" | null;
 
@@ -27,83 +38,24 @@ type Category = "frame" | "landmark" | "festivals" | "food" | "stamp" | null;
 // CONFIGURATION
 // ─────────────────────────────────────────────
 
-const FRAME_COLORS = [
-  "#FBEE7B",
-  "#FF6DB7",
-  "#4AA7FF",
-  "#26B56D",
-  "#F93C35",
-  "#011899",
-  "#FD6E75",
-  "#FB6501",
-  "#FFFFFF",
-  "#000000",
-];
-
-const LANDMARK_IMAGES = [
-  "/postcard/icons/icon_landmarks.png",
-  "/postcard/landmarks/landmarks_2.png",
-  "/countries/china/landmarks/templeofheaven/congrats_landmark.png",
-  "/postcard/landmarks/landmarks_4.png",
-  "/postcard/landmarks/landmarks_5.png",
-  "/postcard/landmarks/landmarks_6.png",
-];
-
-// Festivals index 0–3 → map to a different placed image; index 4–5 → placed directly
-const FESTIVAL_IMAGES = [
-  "/countries/china/festivals/cny/block_2.png",
-  "/postcard/festivals/festival_2.png",
-  "/countries/china/festivals/cny/congrats_firework_right.png",
-  "/countries/china/landmarks/templeofheaven/congrats_lantern.png",
-  "/postcard/festivals/festival_5.png",
-  "/countries/china/festivals/cny/block_1.png",
-];
-// const FESTIVAL_PLACED_IMAGES: Record<number, string> = {
-//   0: "/postcard/festivals/festival_1_placed.png",
-//   1: "/postcard/festivals/festival_2_placed.png",
-//   2: "/postcard/festivals/festival_3_placed.png",
-//   3: "/postcard/festivals/festival_4_placed.png",
-// };
-
-const FOOD_IMAGES = [
-  "/postcard/food/food_1.png",
-  "/countries/china/food/friedrice/ing_soysauce.png",
-  "/countries/china/festivals/cny/block_6.png",
-  "/postcard/food/food_4.png",
-  "/postcard/food/food_5.png",
-  "/countries/china/food/friedrice/ing_shrimp.png",
-];
-
-const STAMP_IMAGES = [
-  "/postcard/stamps/stamp_1.png",
-  "/postcard/stamps/stamp_2.png",
-  "/postcard/stamps/stamp_3.png",
-  "/countries/china/stamp.png",
-  "/postcard/stamps/stamp_5.png",
-  "/postcard/stamps/stamp_6.png",
+const FRAME_OPTIONS: { color: string; image: string }[] = [
+  { color: "#FBEE7B", image: "/postcard/frames/frame_yellow.png" },
+  { color: "#FF6DB7", image: "/postcard/frames/frame_pink.png" },
+  { color: "#4AA7FF", image: "/postcard/frames/frame_blue.png" },
+  { color: "#26B56D", image: "/postcard/frames/frame_green.png" },
+  { color: "#F93C35", image: "/postcard/frames/frame_red.png" },
+  { color: "#011899", image: "/postcard/frames/frame_darkblue.png" },
+  { color: "#FD6E75", image: "/postcard/frames/frame_salmon.png" },
+  { color: "#FB6501", image: "/postcard/frames/frame_orange.png" },
+  { color: "#FFFFFF", image: "/postcard/frames/frame_white.png" },
+  { color: "#000000", image: "/postcard/frames/frame_black.png" },
 ];
 
 const INFO_CARD_IMAGE = "/postcard/info_card.png";
 
-const CARD_W = 981;
+const CARD_W = 970;
 const CARD_H = 572;
-const FRAME_THICKNESS = 55;
-
-const CATEGORIES: { key: Category; label: string; image: string }[] = [
-  { key: "frame", label: "FRAME", image: "/postcard/icons/icon_frame.png" },
-  {
-    key: "landmark",
-    label: "LANDMARK",
-    image: "/postcard/icons/icon_landmarks.png",
-  },
-  {
-    key: "festivals",
-    label: "FESTIVALS",
-    image: "/postcard/icons/icon_festivals.png",
-  },
-  { key: "food", label: "FOOD", image: "/postcard/icons/icon_food.png" },
-  { key: "stamp", label: "STAMP", image: "/postcard/icons/icon_stamp.png" },
-];
+const FRAME_THICKNESS = 100;
 
 // ─────────────────────────────────────────────
 
@@ -122,28 +74,39 @@ function decodeJWT(token: string): { id?: string } | null {
     return null;
   }
 }
-function getFrameFilter(hex: string): string {
-  const filters: Record<string, string> = {
-    "#FF6DB7": "saturate(1) brightness(0.8) hue-rotate(280deg)",
-    "#4AA7FF": "saturate(1) brightness(0.8) hue-rotate(150deg)",
-    "#26B56D": "saturate(1.2) brightness(0.8) hue-rotate(80deg)",
-    "#F93C35": "saturate(3.5) brightness(0.6) hue-rotate(300deg)",
-    "#011899": "saturate(1.7) brightness(0.3) hue-rotate(180deg)",
-    "#FD6E75": "saturate(1.3) brightness(0.8) hue-rotate(300deg)",
-    "#FB6501": "saturate(2) brightness(0.75) hue-rotate(340deg)",
-    "#FFFFFF": "brightness(1.6) saturate(0.1) contrast(1.2)",
-    "#000000": "brightness(0.05) saturate(0)",
-  };
-  return filters[hex] ?? "none";
-}
+// function getFrameFilter(hex: string): string {
+//   const filters: Record<string, string> = {
+//     "#FF6DB7": "saturate(1) brightness(0.8) hue-rotate(280deg)",
+//     "#4AA7FF": "saturate(1) brightness(0.8) hue-rotate(150deg)",
+//     "#26B56D": "saturate(1.2) brightness(0.8) hue-rotate(80deg)",
+//     "#F93C35": "saturate(3.5) brightness(0.6) hue-rotate(300deg)",
+//     "#011899": "saturate(1.7) brightness(0.3) hue-rotate(180deg)",
+//     "#FD6E75": "saturate(1.3) brightness(0.8) hue-rotate(300deg)",
+//     "#FB6501": "saturate(2) brightness(0.75) hue-rotate(340deg)",
+//     "#FFFFFF": "brightness(1.6) saturate(0.1) contrast(1.2)",
+//     "#000000": "brightness(0.05) saturate(0)",
+//   };
+//   return filters[hex] ?? "none";
+// }
 
 // ─────────────────────────────────────────────
 
-export default function PostcardStudioPage() {
+export default function PostcardStudio({
+  countryName,
+  landmarkImages,
+  landmarkIcon,
+  festivalImages,
+  festivalIcon,
+  foodImages,
+  foodIcon,
+  stampImages,
+  stampIcon,
+}: PostcardStudioProps) {
   const router = useRouter();
 
   const [activeCategory, setActiveCategory] = useState<Category>(null);
   const [frameColor, setFrameColor] = useState<string | null>(null);
+  const [frameImage, setFrameImage] = useState<string | null>(null);
   const [placedItems, setPlacedItems] = useState<PlacedItem[]>([]);
   const [showInfo, setShowInfo] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -154,6 +117,14 @@ export default function PostcardStudioPage() {
   const [showSharePopup, setShowSharePopup] = useState(false);
   const [shareUrl, setShareUrl] = useState<string>("");
   const [generatingShare, setGeneratingShare] = useState(false);
+
+  const CATEGORIES: { key: Category; label: string; image: string }[] = [
+    { key: "frame", label: "FRAME", image: "/postcard/icon_frame.png" },
+    { key: "landmark", label: "LANDMARK", image: landmarkIcon },
+    { key: "festivals", label: "FESTIVALS", image: festivalIcon },
+    { key: "food", label: "FOOD", image: foodIcon },
+    { key: "stamp", label: "STAMP", image: stampIcon },
+  ];
 
   const dragging = useRef<{
     id: string;
@@ -168,7 +139,7 @@ export default function PostcardStudioPage() {
         const res = await fetch("http://localhost:5000/api/ai/keywords", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ countryName: "China" }), // swap with dynamic country later
+          body: JSON.stringify({ countryName }), // swap with dynamic country later
         });
         const data = await res.json();
         if (Array.isArray(data)) setKeywords(data);
@@ -201,7 +172,12 @@ export default function PostcardStudioPage() {
         string,
         { x: number; y: number; width: number; height: number }
       > = {
-        landmark: { x: 10, y: CARD_H / 2 - 170, width: 500, height: 460 },
+        landmark: {
+          x: CARD_W / 2 - 100,
+          y: CARD_H / 2 - 100,
+          width: 500,
+          height: 460,
+        },
         festivals: {
           x: CARD_W / 2 - 80,
           y: CARD_H / 2 - 80,
@@ -255,7 +231,7 @@ export default function PostcardStudioPage() {
         0,
         Math.min(
           ev.clientY - r.top - dragging.current.offsetY,
-          CARD_H - item.height,
+          item.category === "landmark" ? CARD_H - 40 : CARD_H - item.height,
         ),
       );
       setPlacedItems((prev) =>
@@ -352,7 +328,7 @@ export default function PostcardStudioPage() {
 
       const body = {
         userId,
-        backgroundName: frameColor ?? "none",
+        backgroundName: frameImage ?? "none",
         jsonLayout: layout,
         elements: layout,
         postcardText: postcardTitle,
@@ -389,6 +365,8 @@ export default function PostcardStudioPage() {
         useCORS: true,
         backgroundColor: "#ffffff",
         scale: 2, // higher resolution
+        width: CARD_W + FRAME_THICKNESS,
+        height: CARD_H + FRAME_THICKNESS,
       });
 
       canvas.toBlob((blob) => {
@@ -403,33 +381,15 @@ export default function PostcardStudioPage() {
   };
 
   const placedSrcs = new Set(placedItems.map((item) => item.src));
-  // const placedFestivalIndexes = new Set(
-  //   placedItems
-  //     .filter((item) => item.category === "festivals")
-  //     .map(
-  //       (item) =>
-  //         Object.entries(FESTIVAL_PLACED_IMAGES).find(
-  //           ([, v]) => v === item.src,
-  //         )?.[0],
-  //     )
-  //     .filter(Boolean),
-  // );
 
   // ── Sidebar grid images list ──────────────
   const getSidebarImages = (): string[] => {
     if (!activeCategory || activeCategory === "frame") return [];
-    // if (activeCategory === "festivals") {
-    //   return FESTIVAL_IMAGES.filter((src, i) => {
-    //     if (i <= 3) return !placedFestivalIndexes.has(String(i));
-    //     return !placedSrcs.has(src);
-    //   });
-    // }
-
     const map: Record<string, string[]> = {
-      landmark: LANDMARK_IMAGES,
-      festivals: FESTIVAL_IMAGES,
-      food: FOOD_IMAGES,
-      stamp: STAMP_IMAGES,
+      landmark: [...landmarkImages],
+      festivals: [...festivalImages],
+      food: [...foodImages],
+      stamp: [...stampImages],
     };
     return (map[activeCategory] ?? []).filter((src) => !placedSrcs.has(src));
   };
@@ -508,7 +468,7 @@ export default function PostcardStudioPage() {
               letterSpacing: 0,
               textTransform: "capitalize",
               color: "var(--pink-primary)",
-              margin: 0,
+              marginTop: 24,
             }}
           >
             You've Seen The World
@@ -540,10 +500,11 @@ export default function PostcardStudioPage() {
         <div
           style={{
             display: "flex",
-            gap: 75,
+            gap: 35,
             alignItems: "flex-start",
             marginLeft: "20px",
             marginBottom: "20px",
+            marginTop: "-24px",
           }}
         >
           {/* Postcard container including optional frame */}
@@ -557,9 +518,9 @@ export default function PostcardStudioPage() {
               overflow: "hidden",
             }}
           >
-            {frameColor && (
+            {frameColor && frameImage && (
               <img
-                src="/postcard/frame.png"
+                src={frameImage}
                 alt="Postcard frame"
                 draggable={false}
                 style={{
@@ -570,8 +531,8 @@ export default function PostcardStudioPage() {
                   height: CARD_H + FRAME_THICKNESS,
                   zIndex: 0,
                   pointerEvents: "none",
-                  filter: getFrameFilter(frameColor),
                   objectFit: "fill",
+                  // transform: frameColor === "#FBEE7B" ? "none" : "scale(1.1)",
                 }}
               />
             )}
@@ -606,6 +567,7 @@ export default function PostcardStudioPage() {
                     cursor: "grab",
                     userSelect: "none",
                     zIndex: 2,
+                    // transform: countryName === "Egypt" ? "scale(1.2)" : "none",
                   }}
                 />
               ))}
@@ -619,6 +581,7 @@ export default function PostcardStudioPage() {
               flexDirection: "column",
               gap: 28,
               flexShrink: 0,
+              transform: "translateY(20px)",
             }}
           >
             {visibleCategories.map((cat) => (
@@ -677,25 +640,33 @@ export default function PostcardStudioPage() {
                     }}
                   >
                     {cat.key === "frame"
-                      ? FRAME_COLORS.map((color) => (
+                      ? FRAME_OPTIONS.map((opt) => (
                           <button
-                            key={color}
-                            onClick={() =>
-                              setFrameColor(color === frameColor ? null : color)
-                            }
+                            key={opt.color}
+                            onClick={() => {
+                              if (opt.color === frameColor) {
+                                setFrameColor(null);
+                                setFrameImage(null);
+                              } else {
+                                setFrameColor(opt.color);
+                                setFrameImage(opt.image);
+                              }
+                            }}
                             style={{
                               width: "90%",
                               height: "80%",
-                              background: color,
+                              background: opt.color,
                               border:
-                                frameColor == color
+                                frameColor == opt.color
                                   ? "3px solid #000"
                                   : "2px solid #000",
                               cursor: "pointer",
                               borderRadius: 2,
                               transition: "transform 0.1s",
                               transform:
-                                frameColor == color ? "scale(1.1)" : "scale(1)",
+                                frameColor == opt.color
+                                  ? "scale(1.1)"
+                                  : "scale(1)",
                             }}
                           />
                         ))
@@ -719,6 +690,10 @@ export default function PostcardStudioPage() {
                                 height: "80%",
                                 aspectRatio: "1",
                                 objectFit: "contain",
+                                // transform:
+                                //   countryName === "Egypt" && cat.key != "stamp"
+                                //     ? "scale(1.3)"
+                                //     : "none",
                               }}
                             />
                           </button>

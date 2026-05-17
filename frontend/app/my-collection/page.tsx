@@ -36,24 +36,24 @@ interface ProgressEntry {
 // Grid card dimensions — all cards same size
 const CARD_W = 335;
 const CARD_H = 186;
-const FRAME_SIZE = 16; // visible frame thickness around card
+const FRAME_SIZE = 20; // visible frame thickness around card
 const TOTAL_SLOTS = 6;
 
-// Same filter map as postcard studio so frames render identically
-function getFrameFilter(hex: string): string {
-  const filters: Record<string, string> = {
-    "#FF6DB7": "saturate(1) brightness(0.8) hue-rotate(280deg)",
-    "#4AA7FF": "saturate(1) brightness(0.8) hue-rotate(150deg)",
-    "#26B56D": "saturate(1.2) brightness(0.8) hue-rotate(80deg)",
-    "#F93C35": "saturate(3.5) brightness(0.6) hue-rotate(300deg)",
-    "#011899": "saturate(1.7) brightness(0.3) hue-rotate(180deg)",
-    "#FD6E75": "saturate(1.3) brightness(0.8) hue-rotate(300deg)",
-    "#FB6501": "saturate(2) brightness(0.75) hue-rotate(340deg)",
-    "#FFFFFF": "brightness(1.6) saturate(0.1) contrast(1.2)",
-    "#000000": "brightness(0.05) saturate(0)",
-  };
-  return filters[hex] ?? "none";
-}
+// // Same filter map as postcard studio so frames render identically
+// function getFrameFilter(hex: string): string {
+//   const filters: Record<string, string> = {
+//     "#FF6DB7": "saturate(1) brightness(0.8) hue-rotate(280deg)",
+//     "#4AA7FF": "saturate(1) brightness(0.8) hue-rotate(150deg)",
+//     "#26B56D": "saturate(1.2) brightness(0.8) hue-rotate(80deg)",
+//     "#F93C35": "saturate(3.5) brightness(0.6) hue-rotate(300deg)",
+//     "#011899": "saturate(1.7) brightness(0.3) hue-rotate(180deg)",
+//     "#FD6E75": "saturate(1.3) brightness(0.8) hue-rotate(300deg)",
+//     "#FB6501": "saturate(2) brightness(0.75) hue-rotate(340deg)",
+//     "#FFFFFF": "brightness(1.6) saturate(0.1) contrast(1.2)",
+//     "#000000": "brightness(0.05) saturate(0)",
+//   };
+//   return filters[hex] ?? "none";
+// }
 
 // ─────────────────────────────────────────────
 // HELPERS
@@ -87,7 +87,7 @@ const SCALE_X = CARD_W / STUDIO_W;
 const SCALE_Y = CARD_H / STUDIO_H;
 
 function PostcardMini({ postcard }: { postcard: Postcard }) {
-  const frameColor =
+  const frameImage =
     postcard.backgroundName && postcard.backgroundName !== "none"
       ? postcard.backgroundName
       : null;
@@ -97,9 +97,9 @@ function PostcardMini({ postcard }: { postcard: Postcard }) {
   return (
     <div style={{ position: "relative", flexShrink: 0 }}>
       {/* Frame behind card */}
-      {frameColor && (
+      {frameImage && (
         <img
-          src="/postcard/frame.png"
+          src={frameImage}
           alt=""
           draggable={false}
           style={{
@@ -110,7 +110,6 @@ function PostcardMini({ postcard }: { postcard: Postcard }) {
             height: CARD_H + FRAME_SIZE * 2,
             objectFit: "fill",
             zIndex: 0,
-            filter: getFrameFilter(frameColor),
             pointerEvents: "none",
           }}
         />
@@ -159,7 +158,7 @@ function EmptySlot() {
     <div style={{ position: "relative", flexShrink: 0 }}>
       {/* White frame */}
       <img
-        src="/postcard/frame.png"
+        src="/postcard/frames/frame_white.png"
         alt=""
         draggable={false}
         style={{
@@ -170,7 +169,6 @@ function EmptySlot() {
           height: CARD_H + FRAME_SIZE * 2,
           objectFit: "fill",
           zIndex: 0,
-          filter: getFrameFilter("#FFFFFF"), // 👈 white frame
           pointerEvents: "none",
         }}
       />
@@ -202,6 +200,8 @@ export default function PostcardCollectionPage() {
   const [postcards, setPostcards] = useState<Postcard[]>([]);
   const [stampedCountry, setStampedCountry] = useState<string | null>(null);
   const [hasAnyStamp, setHasAnyStamp] = useState(false);
+  const [visitedCountries, setVisitedCountries] = useState<string[]>([]);
+  const [showCountryPicker, setShowCountryPicker] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -235,9 +235,11 @@ export default function PostcardCollectionPage() {
         if (Array.isArray(progressData)) {
           const stamped = progressData.filter((p) => p.hasStamp);
           setHasAnyStamp(stamped.length > 0);
-          if (stamped.length > 0) {
-            setStampedCountry(stamped[0].countryId?.name ?? null);
-          }
+          const names = stamped
+            .map((p) => p.countryId?.name)
+            .filter(Boolean) as string[];
+          setVisitedCountries(names);
+          if (names.length > 0) setStampedCountry(names[0]);
         }
       } catch {
         // silent fail
@@ -438,7 +440,7 @@ export default function PostcardCollectionPage() {
             }}
           >
             <button
-              onClick={() => router.push("/my-collection/postcard-studio")}
+              onClick={() => setShowCountryPicker(true)}
               className="postcard-btn"
               style={btnStyle}
             >
@@ -447,6 +449,93 @@ export default function PostcardCollectionPage() {
               </span>
             </button>
           </div>
+          {showCountryPicker && (
+            <div
+              onClick={() => setShowCountryPicker(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.5)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 200,
+              }}
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid #000",
+                  boxShadow: "-6px 6px 0px var(--pink-primary)",
+                  padding: "28px 32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16,
+                  minWidth: 320,
+                }}
+              >
+                {/* Header */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "Gafiton, sans-serif",
+                      fontSize: 20,
+                      color: "#000",
+                    }}
+                  >
+                    Choose a country
+                  </span>
+                  <button
+                    onClick={() => setShowCountryPicker(false)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      fontSize: 18,
+                      cursor: "pointer",
+                      color: "#000",
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div style={{ height: 1, background: "#000" }} />
+
+                {/* Country buttons */}
+                <div
+                  style={{ display: "flex", flexDirection: "column", gap: 12 }}
+                >
+                  {visitedCountries.map((country) => (
+                    <button
+                      key={country}
+                      onClick={() => {
+                        setShowCountryPicker(false);
+                        router.push(
+                          `/my-collection/${country.toLowerCase()}-studio`,
+                        );
+                      }}
+                      className="postcard-btn"
+                      style={btnStyle}
+                    >
+                      <span
+                        className="subtitle_v2"
+                        style={{ color: "#000000" }}
+                      >
+                        {country.toUpperCase()}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <style>{sharedStyles}</style>
@@ -535,7 +624,11 @@ export default function PostcardCollectionPage() {
 
           {/* Make a Postcard button */}
           <button
-            onClick={() => router.push("/my-collection/postcard-studio")}
+            onClick={() =>
+              router.push(
+                `/my-collection/${stampedCountry.toLowerCase()}-studio`,
+              )
+            }
             className="postcard-btn"
             style={btnStyle}
           >

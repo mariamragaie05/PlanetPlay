@@ -25,8 +25,8 @@ const COUNTRY_STAMP_CONFIGS: Record<
     src: "/countries/egypt/stamp.png",
     top: "55%",
     left: "20%",
-    width: 130,
-    height: 120,
+    width: 100,
+    height: 100,
   },
 };
 
