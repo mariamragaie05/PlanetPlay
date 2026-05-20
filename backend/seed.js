@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const Country = require("./models/Country");
+// const Country = require("./models/Country");
 const Category = require("./models/Category");
 const Quiz = require("./models/Quiz");
 
@@ -11,7 +11,7 @@ const seed = async () => {
   console.log("Connected to MongoDB");
 
   // Clear existing data
-  await Country.deleteMany({});
+  // await Country.deleteMany({});
   await Category.deleteMany({});
   await Quiz.deleteMany({});
   console.log("Cleared existing data");
@@ -19,12 +19,12 @@ const seed = async () => {
   // ════════════════════════════════════════
   // COUNTRIES
   // ════════════════════════════════════════
-  await Country.insertMany([
-    { name: "Egypt", continent: "Africa" },
-    { name: "Germany", continent: "Europe" },
-    { name: "China", continent: "Asia" },
-  ]);
-  console.log("Countries seeded");
+  // await Country.insertMany([
+  //   { name: "Egypt", continent: "Africa" },
+  //   { name: "Germany", continent: "Europe" },
+  //   { name: "China", continent: "Asia" },
+  // ]);
+  // console.log("Countries seeded");
 
   // ════════════════════════════════════════
   // CATEGORIES — EGYPT
