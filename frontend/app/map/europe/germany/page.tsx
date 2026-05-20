@@ -36,7 +36,9 @@ export default function GermanyPage() {
 
     const fetchCounts = async () => {
       try {
-        const countryRes = await fetch("http://localhost:5000/api/countries");
+        const countryRes = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/countries`,
+        );
         if (countryRes.ok) {
           const countries = await countryRes.json();
           setTotalCountries(Array.isArray(countries) ? countries.length : 0);
@@ -46,7 +48,7 @@ export default function GermanyPage() {
         if (!userId) return;
 
         const stampRes = await fetch(
-          `http://localhost:5000/api/progress/user/${userId}/stamps`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/stamps`,
         );
         if (stampRes.ok) {
           const data = await stampRes.json();

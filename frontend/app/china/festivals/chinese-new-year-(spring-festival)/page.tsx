@@ -305,7 +305,7 @@ export default function ChineseNewYearPage() {
     const fetchFunFacts = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/categories/country/China/type/festival",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/categories/country/China/type/festival`,
         );
         const data = await res.json();
         const cny = data.find((item: { name: string; funFacts?: string[] }) =>
@@ -360,19 +360,19 @@ export default function ChineseNewYearPage() {
         if (!userId) return;
 
         const countryRes = await fetch(
-          "http://localhost:5000/api/countries/china",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/countries/china`,
         );
         const countryData = await countryRes.json();
         const countryId = countryData._id;
 
-        await fetch("http://localhost:5000/api/progress", {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId, countryId }),
         });
 
         await fetch(
-          `http://localhost:5000/api/progress/user/${userId}/country/${countryId}/category`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryId}/category`,
           {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -381,7 +381,7 @@ export default function ChineseNewYearPage() {
         );
 
         const progressRes = await fetch(
-          `http://localhost:5000/api/progress/user/${userId}/country/${countryId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryId}`,
         );
         const progressData = await progressRes.json();
         const allCompleted = ["food", "festival", "landmark"].every((cat) =>

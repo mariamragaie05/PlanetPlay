@@ -136,11 +136,14 @@ export default function PostcardStudio({
   useEffect(() => {
     const fetchKeywords = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/ai/keywords", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ countryName }), // swap with dynamic country later
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/ai/keywords`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ countryName }), // swap with dynamic country later
+          },
+        );
         const data = await res.json();
         if (Array.isArray(data)) setKeywords(data);
       } catch {
@@ -288,7 +291,7 @@ export default function PostcardStudio({
       if (postcardTitle.trim().length > 0) {
         try {
           const emotionRes = await fetch(
-            "http://localhost:5000/api/ai/emotion",
+            `${process.env.NEXT_PUBLIC_API_URL}/api/ai/emotion`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -335,11 +338,14 @@ export default function PostcardStudio({
         emotionAnalysis: emotionAnalysis || { emotion: "", message: "" },
       };
 
-      const res = await fetch("http://localhost:5000/api/postcards", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/postcards`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        },
+      );
 
       if (res.ok) {
         setPostcardTitle("");

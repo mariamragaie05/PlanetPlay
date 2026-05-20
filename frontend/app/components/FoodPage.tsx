@@ -24,7 +24,7 @@ export default function FoodPage({ countryName, foodImages }: FoodPageProps) {
     const fetchFoods = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/categories/country/${countryName}/type/food`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/categories/country/${countryName}/type/food`,
         );
         const data = await res.json();
         setFoods(data.slice(0, 3)); // only take 3

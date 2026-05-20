@@ -109,7 +109,7 @@ export default function TheCairoTowerPage() {
     const fetchFunFacts = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/categories/country/Egypt/type/landmark",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/categories/country/Egypt/type/landmark`,
         );
         const data = await res.json();
         const tower = data.find((item: { name: string; funFacts?: string[] }) =>
@@ -152,19 +152,19 @@ export default function TheCairoTowerPage() {
         if (!userId) return;
 
         const countryRes = await fetch(
-          "http://localhost:5000/api/countries/egypt",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/countries/egypt`,
         );
         const countryData = await countryRes.json();
         const countryId = countryData._id;
 
-        await fetch("http://localhost:5000/api/progress", {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId, countryId }),
         });
 
         await fetch(
-          `http://localhost:5000/api/progress/user/${userId}/country/${countryId}/category`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryId}/category`,
           {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -173,7 +173,7 @@ export default function TheCairoTowerPage() {
         );
 
         const progressRes = await fetch(
-          `http://localhost:5000/api/progress/user/${userId}/country/${countryId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryId}`,
         );
         const progressData = await progressRes.json();
         const allCompleted = ["food", "festival", "landmark"].every((cat) =>

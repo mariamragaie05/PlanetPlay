@@ -63,7 +63,9 @@ export default function ViewedPassportPage() {
         const userId = payload.id;
 
         // Fetch all countries
-        const countriesRes = await fetch("http://localhost:5000/api/countries");
+        const countriesRes = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/countries`,
+        );
         if (!countriesRes.ok) throw new Error("Failed to fetch countries");
         const countries = await countriesRes.json();
 
@@ -73,7 +75,7 @@ export default function ViewedPassportPage() {
         // Check progress for each country
         for (const country of countries) {
           const progressRes = await fetch(
-            `http://localhost:5000/api/progress/user/${userId}/country/${country._id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${country._id}`,
           );
           if (progressRes.ok) {
             const progress = await progressRes.json();

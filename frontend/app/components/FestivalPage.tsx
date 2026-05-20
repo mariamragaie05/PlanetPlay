@@ -27,7 +27,7 @@ export default function FestivalPage({
     const fetchFestivals = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/categories/country/${countryName}/type/festival`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/categories/country/${countryName}/type/festival`,
         );
         const data = await res.json();
         setFestivals(data.slice(0, 3));

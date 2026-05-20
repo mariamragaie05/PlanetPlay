@@ -221,14 +221,14 @@ export default function PostcardCollectionPage() {
 
         // ── Fetch postcards ──
         const postcardsRes = await fetch(
-          `http://localhost:5000/api/postcards/user/${userId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/postcards/user/${userId}`,
         );
         const postcardsData = await postcardsRes.json();
         setPostcards(Array.isArray(postcardsData) ? postcardsData : []);
 
         // ── Fetch progress to find stamped countries ──
         const progressRes = await fetch(
-          `http://localhost:5000/api/progress/user/${userId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}`,
         );
         const progressData: ProgressEntry[] = await progressRes.json();
 

@@ -487,13 +487,13 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
 
         // Get China country ID
         const countryRes = await fetch(
-          "http://localhost:5000/api/countries/china",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/countries/china`,
         );
         const countryData = await countryRes.json();
         const countryId = countryData._id;
 
         // Initialize progress if it doesn't exist
-        await fetch("http://localhost:5000/api/progress", {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -503,7 +503,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
 
         // Complete the food category
         await fetch(
-          `http://localhost:5000/api/progress/user/${userId}/country/${countryId}/category`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryId}/category`,
           {
             method: "PATCH",
             headers: {
@@ -515,7 +515,7 @@ function CongratulationsScreen({ bowlImage }: { bowlImage: string }) {
 
         // Get current progress to check completion
         const progressRes = await fetch(
-          `http://localhost:5000/api/progress/user/${userId}/country/${countryId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryId}`,
         );
         const progressData = await progressRes.json();
 

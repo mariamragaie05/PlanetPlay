@@ -30,7 +30,7 @@ export default function SignupPage() {
     try {
       // First, find or create parent
       const parentRes = await fetch(
-        "http://localhost:5000/api/parents/find-or-create",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/parents/find-or-create`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -48,19 +48,22 @@ export default function SignupPage() {
       const parentId = parentData.parentId;
 
       // Then, signup user with parentId
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: form.firstName,
-          lastName: form.lastName,
-          age: Number(form.age),
-          username: form.username,
-          password: form.password,
-          parentId,
-          avatar: form.avatar,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstName: form.firstName,
+            lastName: form.lastName,
+            age: Number(form.age),
+            username: form.username,
+            password: form.password,
+            parentId,
+            avatar: form.avatar,
+          }),
+        },
+      );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       localStorage.setItem("token", data.token);

@@ -27,7 +27,7 @@ export default function LandmarkPage({
     const fetchLandmarks = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/categories/country/${countryName}/type/landmark`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/categories/country/${countryName}/type/landmark`,
         );
         const data = await res.json();
         setLandmarks(data.slice(0, 3));

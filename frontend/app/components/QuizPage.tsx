@@ -63,7 +63,7 @@ export default function QuizPage({ countryName }: { countryName: string }) {
     const fetchQuiz = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/quizzes/${countryName}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/quizzes/${countryName}`,
         );
         if (!res.ok) throw new Error("Quiz not found");
         const data = await res.json();
@@ -72,13 +72,13 @@ export default function QuizPage({ countryName }: { countryName: string }) {
         const userId = getUserIdFromToken();
         if (userId) {
           const countryRes = await fetch(
-            `http://localhost:5000/api/countries/${countryName}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/countries/${countryName}`,
           );
           const countryData = await countryRes.json();
           setCountryId(countryData._id);
 
           const progressRes = await fetch(
-            `http://localhost:5000/api/progress/user/${userId}/country/${countryData._id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryData._id}`,
           );
           if (progressRes.ok) {
             const progressData = await progressRes.json();
@@ -152,7 +152,7 @@ export default function QuizPage({ countryName }: { countryName: string }) {
 
     try {
       const countryRes = await fetch(
-        `http://localhost:5000/api/countries/${countryName}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/countries/${countryName}`,
       );
       if (!countryRes.ok) {
         console.error("Unable to resolve country ID", countryRes.statusText);
@@ -161,7 +161,7 @@ export default function QuizPage({ countryName }: { countryName: string }) {
       const countryData = await countryRes.json();
 
       const progressRes = await fetch(
-        `http://localhost:5000/api/progress/user/${userId}/country/${countryData._id}/quiz`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/progress/user/${userId}/country/${countryData._id}/quiz`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -190,14 +190,17 @@ export default function QuizPage({ countryName }: { countryName: string }) {
     wrongQs: string[],
   ): Promise<Question | null> => {
     try {
-      const res = await fetch("http://localhost:5000/api/ai/quiz-difficulty", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          countryId,
-          userId: getUserIdFromToken(),
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/ai/quiz-difficulty`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            countryId,
+            userId: getUserIdFromToken(),
+          }),
+        },
+      );
       if (!res.ok) {
         console.error("AI fetch failed:", res.status);
         return null;
@@ -270,15 +273,18 @@ export default function QuizPage({ countryName }: { countryName: string }) {
       const userId = getUserIdFromToken();
       if (userId && countryId) {
         try {
-          await fetch("http://localhost:5000/api/ai/quiz-attempt", {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              userId,
-              countryId,
-              wrongAnswers,
-            }),
-          });
+          await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/ai/quiz-attempt`,
+            {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                userId,
+                countryId,
+                wrongAnswers,
+              }),
+            },
+          );
         } catch {
           // silent
         }

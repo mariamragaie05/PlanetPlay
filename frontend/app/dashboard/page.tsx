@@ -33,11 +33,14 @@ export default function Dashboard() {
         const userId = payload?.id;
         if (!userId) return;
 
-        const res = await fetch("http://localhost:5000/api/ai/recommend", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId }),
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/ai/recommend`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId }),
+          },
+        );
         const data = await res.json();
         if (data?.reason) setRecommendation(data.reason);
       } catch {
